@@ -5,6 +5,36 @@ import Image from 'next/image';
 import { titleFont } from '@/app/config/fonts'
 
 import { IoSearchOutline,IoCartOutline,IoPersonCircleOutline,IoMenuOutline   } from "react-icons/io5";
+import { TopMenuItem } from '../top-menu-item/TopMenuItem';
+
+
+//todo pediente modificar
+const itemMenu=[
+  {
+    categoryName:"Mujer"
+  },
+  {
+    categoryName:"Hombre"
+  },
+  {
+    categoryName:"Niños"
+  },
+  {
+    categoryName:"Jugueteria"
+  },
+  {
+    categoryName:"Regalos"
+  },
+  {
+    categoryName:"Hogar"
+  },
+  {
+    categoryName:"Mascotas"
+  },
+  {
+    categoryName:"Belleza y bienestar"
+  },
+]
 
 
 export const TopMenu = () => {
@@ -62,17 +92,14 @@ export const TopMenu = () => {
             Envios gratis por compras superiores $100.000 COP
           </span>
       </div>
-      <div className='flex w-full justify-center bg-[rgba(211,207,184,255)]'>
-        <div className='hidden sm:block p-2 '>
-            <span className={`${titleFont.className} m-2 p-2 rounded-md transition-all hover:bg-[#678680] text-[rgba(0,81,89,255)] font-bold`}>Mujer</span>
-            <span className={`${titleFont.className} m-2 p-2 rounded-md transition-all hover:bg-[#678680] text-[rgba(0,81,89,255)] font-bold`}>Hombre</span>
-            <span className={`${titleFont.className} m-2 p-2 rounded-md transition-all hover:bg-[#678680] text-[rgba(0,81,89,255)] font-bold`}>Niños</span>
-            <span className={`${titleFont.className} m-2 p-2 rounded-md transition-all hover:bg-[#678680] text-[rgba(0,81,89,255)] font-bold`}>Jugueteria</span>
-            <span className={`${titleFont.className} m-2 p-2 rounded-md transition-all hover:bg-[#678680] text-[rgba(0,81,89,255)] font-bold`}>Regalos</span>
-            <span className={`${titleFont.className} m-2 p-2 rounded-md transition-all hover:bg-[#678680] text-[rgba(0,81,89,255)] font-bold`}>Hogar</span>
-            <span className={`${titleFont.className} m-2 p-2 rounded-md transition-all hover:bg-[#678680] text-[rgba(0,81,89,255)] font-bold`}>Macotas</span>
-            <span className={`${titleFont.className} m-2 p-2 rounded-md transition-all hover:bg-[#678680] text-[rgba(0,81,89,255)] font-bold`}>Belleza y bienestar</span>
-          </div>
+      <div className='flex w-full justify-center bg-[rgba(211,207,184,255)] '>
+        <div className='flex relative group'>
+             {
+              itemMenu.map(category=>(
+                <TopMenuItem categoryName={category.categoryName} />
+              ))   
+            } 
+        </div>
       </div>
     </nav>
   )
