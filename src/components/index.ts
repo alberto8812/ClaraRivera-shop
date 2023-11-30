@@ -1,3 +1,7 @@
+import { ProductCardHome } from "./product/productCardhome/ProductCardHome";
+
+
+
 
 export { TopMenuItem } from "./ui/top-menu-item/TopMenuItem";
 export { SlideShowImage } from "./slideshowimage/SlideShowImage";
