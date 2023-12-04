@@ -26,7 +26,7 @@ export default function Home() {
             {
               category.product.map(product=>(
                  //todo link pending 
-                   <Link href={`product/${product.id}`}>
+                   <Link href={`product/${product.id}`} key={product.id}>
                       <ProductCardHome {...product}/>
                    </Link>
                    ))
