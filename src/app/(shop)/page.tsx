@@ -10,7 +10,7 @@ export default function Home() {
     <div className="">
      <SlideShowImage/>
      
-     <div className='m-2 p-5 flex flex-col justify-center '>
+     <div className='m-2 p-5 flex flex-col justify-cente items-center '>
       {
         categoruProduct.map(category=>(
           <div key={category.category} className=''>
@@ -22,13 +22,13 @@ export default function Home() {
                 <hr className='bg-gray-400 h-1'/>
               </div>
             </div>
-            <div className=' flex justify-evenly items-center p-8  '>
+            <div className=' grid grid-cols-1 sm:grid-cols-3  justify-evenly  items-end  p-5   gap-4 '>
             {
               category.product.map(product=>(
                  //todo link pending 
-                   <Link href={`product/${product.id}`} key={product.id}>
-                      <ProductCardHome {...product}/>
-                   </Link>
+                  
+                      <ProductCardHome {...product} key={product.id}/>
+                   
                    ))
                   }
                   </div>
