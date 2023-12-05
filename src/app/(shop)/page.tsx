@@ -27,7 +27,7 @@ export default function Home() {
               category.product.map(product=>(
                  //todo link pending 
                   
-                      <ProductCardHome {...product} key={product.id}/>
+                      <ProductCardHome product={product} key={product.slug}/>
                    
                    ))
                   }

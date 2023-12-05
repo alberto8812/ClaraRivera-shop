@@ -1,50 +1,63 @@
-import { FC } from "react";
+'use client'
+import { FC, useState } from "react";
 
 import Image from 'next/image'
 import { titleFont } from "@/app/config/fonts";
 import Link from "next/link";
-import { IoCartOutline } from "react-icons/io5";
+import { IoCartOutline, IoHeart, IoHeartOutline, IoHeartSharp } from "react-icons/io5";
+import { Product } from "@/components/interfaces";
 
 
  interface Props {
-    id    : string;
-    name  : string;
-    price : number;
-    rating: number;
-    image : string;
+  product:Product
   }
 
-export const ProductCardHome:FC <Props> = ({name,price,image,id}) => {
+export const ProductCardHome:FC <Props> = ({product}) => {
+  const {title,price,images,slug}=product;
+  const [imageMouseHover, setImageMouseHover] = useState<string>(images[0]);
+
+
+
   return (
-        <div className="relative m-10 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">        
-              <div className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl">
-                 
-                    <Image
-                     className="object-cover" src={image} alt="product image" 
-                     width={500}
-                     height={500}
-                   />
-            
-                  <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">39% OFF</span>
-            </div>
-          <div className="mt-4 px-5 pb-5">
-              <h5 className={`text-xl tracking-tight text-slate-900 ${titleFont.className}` }>{name}</h5>
-            <div className="mt-2 mb-5 flex flex-col items-start justify-between">
-              <div className="flex items-center">
-                <svg aria-hidden="true" className="h-5 w-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                </svg>
-                <span className="mr-2 ml-3 rounded bg-yellow-200 px-2.5 py-0.5 text-xs font-semibold">5.0</span>
+        <div className= "h-full ">
+          <div className="relative m-10 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md h-[480px]">        
+                <div className="relative mx-3 mt-3 flex h-80 overflow-hidden rounded-xl">
+                  <Link href={`/product/${product.slug}`}>  
+                      <Image
+                      className="object-cover" src={`/products/${imageMouseHover}`} alt="product image" 
+                      width={400}
+                      height={400}
+                      onMouseLeave={()=>setImageMouseHover(images[0])}
+                      onMouseEnter={()=>setImageMouseHover(images[1])}
+                    />
+              
+                  </Link>
+                    <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">39% OFF</span>
               </div>
-              <p>
-                <span className="text-3xl font-bold text-slate-900">$449</span>
-                <span className="text-sm text-slate-900 line-through">$699</span>
-              </p>
-            </div>
-              <div  className="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
-                   <IoCartOutline size={30} className="m-2" /> 
-                  <span className={`font-semibold ${titleFont.className}`}>Add to cart</span>
+            <div className="mt-4 px-5 pb-5 pt-5">
+              <Link href={`/product/${product.slug}`}>
+                  <h5 className={`text-xl tracking-tight text-slate-900 ${titleFont.className} hover:underline hover:text-blue-500` }>{title}</h5>
+              </Link>
+              <div className="mt-2 mb-5 flex flex-col items-start justify-between">
+                <div className="flex items-center">
+                <IoHeart size={20} className="text-gray-400"  />
+                  <span className="mr-2 ml-3 rounded bg-gray-200 px-2.5 py-0.5 text-xs  font-bold">5.0</span>
+                </div>
+                <div className="flex justify-between items-center w-full">
+                  <p>
+                    <span className="text-3xl font-bold text-slate-900">${price}</span>
+                    <span className="text-sm text-slate-900 line-through">$699</span>
+                  </p>
+                  <div  
+                  className="cursor-pointer"
+                
+                      >    
+                  <IoHeartOutline  size={40} className="m-2 text-red-600" /> 
+                    
+                  </div>
+                </div>
               </div>
+            </div>
           </div>
         </div>
 
