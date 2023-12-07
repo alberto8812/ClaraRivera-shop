@@ -11,8 +11,8 @@ export const Footer = () => {
     <div className='grid sm:grid-cols-2 grid-cols-1 justify-evenly al bg-[rgba(186,183,120,255)] w-full p-2 pb-7'>
        <div className='flex flex-col justify-center items-center mt-3'>
          <Image
-         src="/imgs/CLARA RIVERA_LOGO SLOGAN.png"
-         width={300}
+         src="/imgs/CLARA RIVERA_LOGO.jpg"
+         width={450}
          height={300}
          alt=''
          />
@@ -37,9 +37,9 @@ export const Footer = () => {
             </div>
          </div>
        </div>
-       <div className='grid sm:grid-cols-2 grid-cols-1'>
+       <div className='grid sm:grid-cols-2 grid-cols-1 justify-between items-center'>
             {/* pedidos */}
-        <div className='mt-5 flex flex-col justify-center items-center'>
+        <div className='mt-5 flex flex-col justify-center sm:items-end items-center'>
         <span className={`${titleFont.className} antialiased font-bold text-2xl mt-3 text-[rgba(0,81,89,255)] underline`}>Tuspedidos</span>
        
         <div className='flex flex-col mt-2 justify-between'>
@@ -47,19 +47,19 @@ export const Footer = () => {
              href='/'
              className='mt-3'
              >
-                <span className={` font-bold text-2xl mt-3 text-[rgba(0,81,89,255)]  `}>Sigue tu guía</span>
+                <span className={`  text-2xl mt-3 text-[rgba(0,81,89,255)]  `}>Sigue tu guía</span>
              </Link>
              <Link
              href='/'
              className='mt-3'
              >
-                  <span className={`font-bold text-2xl mt-3 text-[rgba(0,81,89,255)] `}>Devoluciones</span>
+                  <span className={`text-2xl mt-3 text-[rgba(0,81,89,255)] `}>Devoluciones</span>
              </Link>
              <Link
               href='/'
               className='mt-3'
              >
-                <span className={`  font-bold text-2xl mt-3 text-[rgba(0,81,89,255)] `}>Q & A</span>
+                <span className={`   text-2xl mt-3 text-[rgba(0,81,89,255)] `}>Q & A</span>
              </Link>
              </div>
  
@@ -67,7 +67,7 @@ export const Footer = () => {
         </div>
        
        {/* Contact */}
-        <div className='mt-5 flex flex-col justify-center items-center'>
+        <div className='mt-5 flex flex-col justify-center items-center  '>
         <span className={`${titleFont.className} antialiased font-bold text-2xl mt-3 text-[rgba(0,81,89,255)] underline`}>Contacto</span>
        
         <div className='flex flex-col mt-2 justify-between'>
@@ -75,19 +75,19 @@ export const Footer = () => {
              href='/'
              className='mt-3'
              >
-                <span className={` font-bold text-2xl mt-3 text-[rgba(0,81,89,255)]  `}>Dirección</span>
+                <span className={` text-2xl mt-3 text-[rgba(0,81,89,255)]  `}>Dirección</span>
              </Link>
              <Link
              href='/'
              className='mt-3'
              >
-                  <span className={`font-bold text-2xl mt-3 text-[rgba(0,81,89,255)] `}>Telefono</span>
+                  <span className={` text-2xl mt-3 text-[rgba(0,81,89,255)] `}>Telefono</span>
              </Link>
              <Link
               href='/'
               className='mt-3'
              >
-                <span className={`  font-bold text-2xl mt-3 text-[rgba(0,81,89,255)] `}>Correo</span>
+                <span className={`  text-2xl mt-3 text-[rgba(0,81,89,255)] `}>Correo</span>
              </Link>
              </div>
            </div>
