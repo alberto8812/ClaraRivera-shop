@@ -5,9 +5,10 @@ export default function shopLayout({
  children: React.ReactNode;
 }) {
   return (
-    <main className="bg-red-500">
-     
-      {children}
+    <main className="">
+      <div>
+         {children}
+      </div> 
     </main>
   );
 }
