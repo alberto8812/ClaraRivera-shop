@@ -1,47 +1,67 @@
 
 import { titleFont } from '@/app/config/fonts';
+import { SlideShowImage } from '@/components';
+import Image from 'next/image';
 import Link from 'next/link';
+import { IoAt, IoLockClosed } from 'react-icons/io5';
+import { RiFacebookLine, RiGoogleLine, RiUserLine } from 'react-icons/ri';
+
 
 export default function () {
   return (
-    <main className="flex flex-col min-h-screen pt-32 sm:pt-52">
+<div className="grid grid-cols-1 md:grid-cols-2  h-screen">
+  
 
-      <h1 className={ `${ titleFont.className } text-4xl mb-5` }>Ingresar</h1>
-
-      <div className="flex flex-col">
-
-        <label htmlFor="email">Correo electrónico</label>
-        <input
-          className="px-5 py-2 border bg-gray-200 rounded mb-5"
-          type="email" />
-
-
-        <label htmlFor="email">Contraseña</label>
-        <input
-          className="px-5 py-2 border bg-gray-200 rounded mb-5"
-          type="email" />
-
-        <button
-          
-          className="btn-primary">
-          Ingresar
-        </button>
+     <Image
+      src="/imgs/CLARA RIVERA_LOGO SLOGAN_Negativo Vinotinto.jpg"
+      width={500}
+      height={500}
+      alt='logo'
+      className="hidden md:block h-screen w-screen"
+     />
 
 
-        {/* divisor l ine */ }
-        <div className="flex items-center my-5">
-          <div className="flex-1 border-t border-gray-500"></div>
-          <div className="px-2 text-gray-800">O</div>
-          <div className="flex-1 border-t border-gray-500"></div>
-        </div>
+  <div className="flex  justify-center items-center bg-white ">
+    <div className="bg-white">
+      <h1 className={`${titleFont.className}text-gray-800 font-bold text-2xl mb-1 pb-5`}>Registrate!</h1>
 
-        <Link
-          href="/auth/new-account" 
-          className="btn-secondary text-center">
-          Crear una nueva cuenta
-        </Link>
 
+
+      <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
+        <RiUserLine  size={20} className="text-gray-400"/>
+        <input className="pl-2 outline-none border-none" type="text" name="" id="" placeholder="Nombre completo" />
       </div>
-    </main>
+
+      <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
+        <IoAt size={20} className="text-gray-400"/>
+        <input className="pl-2 outline-none border-none" type="email" name="" id="" placeholder="Correo Electrónico" />
+      </div>
+      <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
+        <IoLockClosed  size={20} className="text-gray-400"/>
+        <input className="pl-2 outline-none border-none" type="password" name="" id="" placeholder="Contraseña" />
+      </div>
+
+      <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
+        <IoLockClosed  size={20} className="text-gray-400"/>
+        <input className="pl-2 outline-none border-none" type="password" name="" id="" placeholder="Confirmar contraseña" />
+      </div>
+      <button type="submit" className="block w-full bg-[rgba(156,34,78,255)] hover:bg-[rgba(156,50,78,255)] mt-4 py-2 rounded-2xl text-white font-semibold mb-2">
+        Crear cuenta
+      </button>
+      {/* <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer">Forgot Password ?</span> */}
+
+      <p className="text-gray-700 text-sm mt-6">
+           tienes una cuenta? 
+          <Link href="/auth/login" className="text-blue-500 hover:text-blue-600 mt-3 focus:outline-none font-bold underline ml-2">
+             Ingresar
+          </Link>
+        </p>
+    </div>
+    
+  </div>
+</div>
+
+
+
   );
 }

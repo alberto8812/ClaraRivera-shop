@@ -1,3 +1,4 @@
+import { titleFont } from "../config/fonts";
 
 export default function shopLayout({
  children
@@ -5,7 +6,7 @@ export default function shopLayout({
  children: React.ReactNode;
 }) {
   return (
-    <main className="">
+    <main className={`${titleFont.className}`}>
       <div>
          {children}
       </div> 
