@@ -42,11 +42,11 @@ export default function ({params}:Props) {
       
     </div>
      {/* detalles */}
-     <div className="col-span-1 px-5 ">
-     <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>
-          {product?.title}
+     <div className="col-span-1 px-5 pt-16 ">
+     <h1 className={`${titleFont.className} antialiased font-bold text-4xl`}>
+          {product.title}
      </h1>
-     <div className="flex items-center">
+     <div className="flex items-center pt-5">
                 <IoHeart size={30} className="text-gray-400"  />
                   <span className="mr-2 ml-3 rounded bg-gray-200 px-2.5 py-0.5 text-xs  font-bold">5.0</span>
                 </div>
@@ -54,7 +54,7 @@ export default function ({params}:Props) {
       </div>
       
       <p className="text-3xl mb-5 pt-5 font-bold">
-          ${product?.price} COP
+          ${product.price} COP
       </p>
 
        {/* descripcion */}

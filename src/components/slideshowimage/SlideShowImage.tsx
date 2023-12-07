@@ -63,7 +63,7 @@ export const SlideShowImage = () => {
     centeredSlides={true}
     autoplay={{
       delay: 2500,
-      disableOnInteraction: false,
+      disableOnInteraction: true,
     }}
     pagination={{
       clickable: true,
