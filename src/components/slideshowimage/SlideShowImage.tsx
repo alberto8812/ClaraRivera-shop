@@ -1,9 +1,18 @@
 'use client'
-
+import { Swiper, SwiperSlide } from 'swiper/react';
 import Image from 'next/image';
 
-import { Slide } from 'react-slideshow-image';
-import 'react-slideshow-image/dist/styles.css'
+
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+
+
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
+import './slideShowImage.css';
+
 
 const spanStyle = {
     padding: '20px',
@@ -48,10 +57,24 @@ const slideImages = [
 export const SlideShowImage = () => {
 
   return (
-    <div className="slide-container">
-    <Slide>
+    <>
+    <Swiper
+    spaceBetween={30}
+    centeredSlides={true}
+    autoplay={{
+      delay: 2500,
+      disableOnInteraction: true,
+    }}
+    pagination={{
+      clickable: true,
+    }}
+    navigation={true}
+    modules={[Autoplay, Pagination, Navigation]}
+    className="mySwiper"
+  >
+   
      {slideImages.map((slideImage, index)=> (
-        <div key={index} >
+        <SwiperSlide key={index} >
           <Image
                   src={`${slideImage.url}`}
                   alt={`${slideImage.caption}`}
@@ -61,9 +84,12 @@ export const SlideShowImage = () => {
                   style={divStyle}
                   
                  />       
-         </div> 
+         </SwiperSlide> 
       ))} 
-    </Slide>
-  </div>
+ 
+    </Swiper>
+    
+    </>
+     
   )
 }

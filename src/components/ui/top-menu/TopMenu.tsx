@@ -1,4 +1,4 @@
-import React from 'react'
+'use client'
 import Link from 'next/link'
 import Image from 'next/image';
 
@@ -6,6 +6,7 @@ import { titleFont } from '@/app/config/fonts'
 
 import { IoSearchOutline,IoCartOutline,IoPersonCircleOutline,IoMenuOutline   } from "react-icons/io5";
 import { TopMenuItem } from '../top-menu-item/TopMenuItem';
+import { useUIStore } from '@/store';
 
 
 //todo pediente modificar
@@ -38,18 +39,17 @@ const itemMenu=[
 
 
 export const TopMenu = () => {
+
+  const openSideMenu=useUIStore(state=>state.openSideMenu)
   return (
     <nav className='flex flex-col justify-between items-center w-full bg-[rgba(245,245,245,255)]'>
        <div className='flex px-5 justify-between items-center w-full pb-5 pt-2 bg-[rgba(156,34,78,255)]'>       
-            <div>
-                {/* <Link
-                href={"/"}
-                >
-                    <span className={`${titleFont.className} antialiased font-bold  text-cyan-50`}>MarketPlace</span>
-                </Link> */}
-                <button className='m-2 p-2 rounded-md transition-all hover:bg-[#b76080] text-white'>
-                    <IoMenuOutline   className="w-10 h-10 text-cyan-50"  />
-                </button>
+            <div  className='m-2 p-2 rounded-md transition-all hover:bg-[#b76080] text-white'>
+                    <IoMenuOutline   
+                    className="w-10 h-10 text-cyan-50" 
+                    onClick={openSideMenu}
+                     />
+    
             </div>
 
             {/**  MENU  logo*/}
@@ -96,7 +96,7 @@ export const TopMenu = () => {
         <div className='flex relative group'>
              {
               itemMenu.map(category=>(
-                <TopMenuItem categoryName={category.categoryName} />
+                <TopMenuItem categoryName={category.categoryName} key={category.categoryName} />
               ))   
             } 
         </div>

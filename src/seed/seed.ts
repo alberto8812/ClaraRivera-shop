@@ -19,8 +19,6 @@ interface SeedData {
 }
 
 
-
-
 export const initialData: SeedData = {
     products: [
         {
@@ -39,7 +37,7 @@ export const initialData: SeedData = {
             gender: 'men'
         },
         {
-            description: "The Men's Quilted Shirt Jacket features a uniquely fit, quilted design for warmth and mobility in cold weather seasons. With an overall street-smart aesthetic, the jacket features subtle silicone injected Tesla logos below the back collar and on the right sleeve, as well as custom matte metal zipper pulls. Made from 87% nylon and 13% polyurethane.",
+             description: "The Men's Quilted Shirt Jacket features a uniquely fit, quilted design for warmth and mobility in cold weather seasons. With an overall street-smart aesthetic, the jacket features subtle silicone injected Tesla logos below the back collar and on the right sleeve, as well as custom matte metal zipper pulls. Made from 87% nylon and 13% polyurethane.",
             images: [
                 '1740507-00-A_0_2000.jpg',
                 '1740507-00-A_1.jpg',
