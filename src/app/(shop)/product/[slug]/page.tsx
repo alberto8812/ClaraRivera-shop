@@ -24,7 +24,7 @@ export default function ({params}:Props) {
 
 
   return (
-    <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3 ">
+    <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3  ">
 
     <div className="col-span-1 md:col-span-2 ">
             {/* slideshow mobile */}
@@ -42,7 +42,7 @@ export default function ({params}:Props) {
       
     </div>
      {/* detalles */}
-     <div className="col-span-1 px-5 pt-16 ">
+     <div className="col-span-1 px-5 pt-16  md:grid-cols-2">
      <h1 className={`${titleFont.className} antialiased font-bold text-4xl`}>
           {product.title}
      </h1>

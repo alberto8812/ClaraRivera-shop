@@ -57,7 +57,7 @@ const slideImages = [
 export const SlideShowImage = () => {
 
   return (
-    <>
+
     <Swiper
     spaceBetween={30}
     centeredSlides={true}
@@ -70,7 +70,7 @@ export const SlideShowImage = () => {
     }}
     navigation={true}
     modules={[Autoplay, Pagination, Navigation]}
-    className="mySwiper"
+   
   >
    
      {slideImages.map((slideImage, index)=> (
@@ -89,7 +89,7 @@ export const SlideShowImage = () => {
  
     </Swiper>
     
-    </>
+  
      
   )
 }
