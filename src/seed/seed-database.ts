@@ -7,9 +7,9 @@ async function main() {
 
     //1.borrar registros previos
     await Promise.all([
-         prisma.product.deleteMany(),
-         prisma.productImage.deleteMany(),
-         prisma.category.deleteMany(),
+        prisma.productImage.deleteMany(),
+        prisma.product.deleteMany(),
+        prisma.category.deleteMany(),
          prisma.subCategory.deleteMany(),
     ])
   
@@ -59,7 +59,20 @@ async function main() {
             }
         })
         
+        //images
+          
+        const imagesData=images.map(image=>({
+            url:image,
+            ProductId:dbproduct.id
+
+        }))
+
+        await prisma.productImage.createMany({
+            data:imagesData
+        })
+
      });
+
 
     console.log("seed ejecutado")
     
