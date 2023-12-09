@@ -8,6 +8,7 @@
 3. Instalar dependencias ```npm install```
 4. Levantar base de datos ```docker compose up -d```
 5. Correr las migraciones de prima ```npx prisma migrate dev```
+6. Ejecuar seed ```npm run seed```
 6. Correr proyecto ```npm run dev```
 
 
