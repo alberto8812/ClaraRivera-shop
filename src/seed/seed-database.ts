@@ -6,29 +6,39 @@ async function main() {
   
 
     //1.borrar registros previos
-    await Promise.all([
-        prisma.productImage.deleteMany(),
-        prisma.product.deleteMany(),
-        prisma.category.deleteMany(),
-         prisma.subCategory.deleteMany(),
-    ])
-  
-    //categorias
+
+        await prisma.productImage.deleteMany();
+        await prisma.product.deleteMany();
+        await prisma.category.deleteMany();
+        await prisma.subCategory.deleteMany();
+
+
     const {categories,subCategories,products}=initialData;
-    const categoriesData=categories.map(category=>({
+    const categoriesData2=categories.map(category=>({
         name:category
     }))
-     await prisma.category.createMany({
-        data:categoriesData
-     })
 
-    //SUBCATEGORI
-    const subCategoriesData=subCategories.map(subCategory=>({
+    const subCategoriesData2=subCategories.map(subCategory=>({
         name:subCategory
     }))
-     await prisma.subCategory.createMany({
-        data:subCategoriesData
+
+   //SUBCATEGORI
+    await prisma.subCategory.createMany({
+       data:subCategoriesData2
+    })
+        //categorias
+     await prisma.category.createMany({
+        data:categoriesData2
      })
+
+
+
+     
+  
+  
+
+
+
 
      const categoryDB= await prisma.category.findMany();
 
@@ -72,6 +82,43 @@ async function main() {
         })
 
      });
+
+
+    //      //borrar//
+    //      let clothessubcategory=subCategories.filter(subcat=> subcat!='computadores' && subcat!='smartwatch' && subcat!='videojuegos' );
+    //      let clothescategory=categories.filter(subcat=> subcat!='tecnología' && subcat!='otros' && subcat!='hogar'  && subcat!='Belleza y salud'  && subcat!='mascotas');
+    
+    
+    //      const categoriesData=clothescategory.map(category=>({
+    //         name:category
+    //     }))
+    
+    //     const subCategoriesData=clothessubcategory.map(subCategory=>({
+    //         name:subCategory
+    //     }))
+    
+    
+    //     //ensayo
+    
+    //     categoriesData.forEach(async(categorie) => {
+    //         subCategoriesData.forEach(async(subcategorie) => {
+    //             console.log(subcategorie.name,categorie.name)
+    //             await prisma.subCategory.update({
+    //                 where:{id:subcategoriesMap[subcategorie.name]},
+                    
+    //             data:{
+    //                 category:{
+    //                     set:[{id:categoriesMap[categorie.name]},{id:subcategoriesMap[subcategorie.name]}],
+    //                 }
+                
+    //             }
+    //         })
+    //     })
+    // })
+
+
+
+
 
 
     console.log("seed ejecutado")

@@ -748,7 +748,7 @@ export const initialData: SeedData = {
         {
             description: "Sumérgete en un mundo de aventuras y acción con la Consola Playstation 5 Slim Disco Spiderman - Ps5. Este modelo Slim, lanzado en 2023, es una versión más compacta y elegante de la aclamada Playstation 5, diseñada por Sony, una marca líder en la industria de los videojuegos. Su color blanco puro y su diseño sofisticado la convierten en una adición estilizada a cualquier espacio de entretenimiento",
             images: [
-                '1473834-00-A_2_2000_ps5.jpg.jpg',
+                '1473834-00-A_2_2000_ps5.jpg',
                 '1473834-00-A_2_2000_ps52.jpg',
             ],
             inStock: 10,
