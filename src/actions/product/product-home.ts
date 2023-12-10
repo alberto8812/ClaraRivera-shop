@@ -37,7 +37,7 @@ export const getHomeProductsWithImages= async()=>{
             }))
         }
         ))
-        console.log(products)
+       
         return products;
     } catch (error) {
         

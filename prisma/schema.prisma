@@ -35,13 +35,15 @@ enum Gender {
 model Category {
    id   String @id @default(uuid())
    name String @unique
-   Product Product[]
+   subCategory SubCategory[]
+   Product     Product[]
 }
 
 model SubCategory{
    id   String @id @default(uuid())
    name String @unique
-   Product Product[]
+   category    Category[]
+   Product     Product[]
 }
 
 

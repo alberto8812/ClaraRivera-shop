@@ -7,6 +7,8 @@ import { titleFont } from '@/app/config/fonts'
 import { IoSearchOutline,IoCartOutline,IoPersonCircleOutline,IoMenuOutline   } from "react-icons/io5";
 import { TopMenuItem } from '../top-menu-item/TopMenuItem';
 import { useUIStore } from '@/store';
+import { FC } from 'react';
+
 
 
 //todo pediente modificar
@@ -36,9 +38,26 @@ const itemMenu=[
     categoryName:"Belleza y bienestar"
   },
 ]
+interface SubCategory {
+  id:string,
+  name:string
+}
+
+interface CategoriesSubcategories{
+  id:string,
+  name:string
+  subCategory:SubCategory[]
+}
+
+interface Props{
+  categoriesSubcategories:CategoriesSubcategories[];
+
+}
+
+export const TopMenu:FC <Props> =({categoriesSubcategories}) => {
 
 
-export const TopMenu = () => {
+
 
   const openSideMenu=useUIStore(state=>state.openSideMenu)
   return (
@@ -93,14 +112,16 @@ export const TopMenu = () => {
           </span>
       </div>
       <div className='flex w-full justify-center bg-[rgba(211,207,184,255)] '>
-        <div className='flex relative group'>
+        {/* <div className='flex relative group'> */}
+          <ul className='flex items-center justify-center font-semibold'>
              {
-              itemMenu.map(category=>(
-                <TopMenuItem categoryName={category.categoryName} key={category.categoryName} />
+              categoriesSubcategories.map(category=>(
+                <TopMenuItem categoryName={category.name} key={category.id}  subcategories={category.subCategory}/>
               ))   
             } 
+          </ul>
         </div>
-      </div>
+      {/* </div> */}
     </nav>
   )
 }
