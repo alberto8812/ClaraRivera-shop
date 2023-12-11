@@ -1,7 +1,7 @@
 import { Pagination } from "@/components";
 
 
-export default function () {
+export default function ProductsPage() {
   return (
     <div className="h-[100vh]">
       <h1>products Page</h1>
