@@ -12,6 +12,18 @@ export interface Product {
     gender: Category
 }
 
+
+export interface CartProduct{
+    id:string,
+    slug:string,
+    title:string,
+    price:number,
+    quantity:number,
+    size?:Size,
+    image:string,
+}
+
+
 export type Category='mujer'|'hombre'|'kids'|'hogar'|'NA'|'unisex' ;
 export type Size = 'XS'|'S'|'M'|'L'|'XL'|'XXL'|'XXXL'| 'NA';
 export type Type = 'shirts'|'pants'|'hoodies'|'hats';

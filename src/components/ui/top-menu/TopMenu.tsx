@@ -6,8 +6,8 @@ import { titleFont } from '@/app/config/fonts'
 
 import { IoSearchOutline,IoCartOutline,IoPersonCircleOutline,IoMenuOutline   } from "react-icons/io5";
 import { TopMenuItem } from '../top-menu-item/TopMenuItem';
-import { useUIStore } from '@/store';
-import { FC } from 'react';
+import { useCartStore, useUIStore } from '@/store';
+import { FC, useEffect, useState } from 'react';
 
 
 
@@ -30,11 +30,16 @@ interface Props{
 }
 
 export const TopMenu:FC <Props> =({categoriesSubcategories}) => {
+  const openSideMenu=useUIStore(state=>state.openSideMenu);
+  const totalItemsCart=useCartStore(state=>state.getTotalItems());
+  const [isloaded, setIsloaded] = useState(false);
+
+   useEffect(() => {
+     setIsloaded(true)
+   }, [])
 
 
-
-
-  const openSideMenu=useUIStore(state=>state.openSideMenu)
+  
   return (
     <nav className='flex flex-col justify-between items-center w-full bg-[rgba(245,245,245,255)]'>
        <div className='flex px-5 justify-between items-center w-full pb-5 pt-2 bg-[rgba(156,34,78,255)]'>       
@@ -68,11 +73,14 @@ export const TopMenu:FC <Props> =({categoriesSubcategories}) => {
                     <IoPersonCircleOutline   className="w-8 h-8  text-cyan-50" />
                   </Link>
 
-                  <Link  href="/cart" className='mx-2'>
+                  <Link  href={`${(totalItemsCart>0) && (isloaded) ?'/cart':'/empty'}`} className='mx-2'>
                     <div className='relative'>
-                      <span className='absolute text-xs rounded-full px-1 font-bold -top-2 -right-2 bg-blue-700 text-white'>
-                        3
-                      </span>
+                     {
+                       (isloaded) && (totalItemsCart>0) &&
+                       (<span className=' fade-in absolute text-xs rounded-full px-1 font-bold -top-2 -right-2 bg-blue-700 text-white'>
+                           {totalItemsCart}
+                         </span>)
+                      }
                       <IoCartOutline  className="w-8 h-8 text-cyan-50"  />
                     </div>
                   </Link>

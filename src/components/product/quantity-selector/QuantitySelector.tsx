@@ -4,15 +4,16 @@ import { IoAddCircleOutline, IoRemoveCircleOutline } from "react-icons/io5"
 
 
 interface Props {
-  quantity:number
+  quantity:number,
+  onquantityChange:(qunatity:number)=>void,
 }
 
-export const QuantitySelector:FC <Props> = ({quantity}) => {
-  const [count, setCount] = useState(quantity);
+export const QuantitySelector:FC <Props> = ({quantity,onquantityChange}) => {
+ 
 
    const onQuantityChanged=(value:number)=>{
 
-    setCount(prev=>Math.max(prev+value,1));
+    onquantityChange(Math.max(quantity+value,1));
    }
 
   return (
@@ -22,7 +23,7 @@ export const QuantitySelector:FC <Props> = ({quantity}) => {
       >
         <IoRemoveCircleOutline size={30}/>
       </button>
-        <span className="w-20 mx-3 px-5 bg-gray-200 text-center rounded">{count}</span>
+        <span className="w-20 mx-3 px-5 bg-gray-200 text-center rounded">{quantity}</span>
       <button
       onClick={()=>onQuantityChanged(1)}
       >
