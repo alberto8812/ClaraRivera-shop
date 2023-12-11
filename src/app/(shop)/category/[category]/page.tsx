@@ -1,29 +1,37 @@
 import { getPaginatedProductsWithImages } from "@/actions";
 import { Pagination, ProductCardHome, Title } from "@/components";
+import { redirect } from "next/navigation";
+
+
 
 interface Props{
   params:{
     category:string;
     
+  },
+  searchParams:{
+    page?:string
   }
+
 }
 
 
 
-export default async function ({params}:Props) {
-  const [category,subcategory]=params.category.split('_');
-  const Categorydecode=decodeURIComponent(category)
-  const subcategorydecode=decodeURIComponent(subcategory)
+export default async function ({params,searchParams}:Props) {
+  const {category}=params;
+  const page=searchParams.page? parseInt(searchParams.page):1;
+  const getProductCategory= await getPaginatedProductsWithImages({page,category});
 
+  const [categoryName,subcategoryName]=params.category.split('_');
+  const Categorydecode=decodeURIComponent(categoryName);
+  const subcategorydecode=decodeURIComponent(subcategoryName);
 
-
-
-  const params2={
-    category,
-    subcategory,
-  }
   
-   const getProductCategory= await getPaginatedProductsWithImages(params2);
+
+
+   if(getProductCategory?.products.length===0){
+    redirect(`/category/${ category }`);
+   }
 
 
 
@@ -44,7 +52,7 @@ export default async function ({params}:Props) {
         
       </div>
 
-            <Pagination totalPages={2}/>
+            <Pagination totalPages={getProductCategory?.toltalPage??1}/>
     </div>
   );
 }
