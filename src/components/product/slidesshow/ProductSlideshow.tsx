@@ -24,7 +24,7 @@ interface Props{
 export const ProductSlideshow:FC <Props> = ({images,title,className}) => {
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperObject>();
   return (
-    <div className={`${className}  md:grid-cols-5 gap-2`}>   
+    <div className={`${className}  md:grid-cols-5 gap-2  rounded-sm `}>   
        <Swiper
         onSwiper={setThumbsSwiper}
         spaceBetween={15}
@@ -33,15 +33,13 @@ export const ProductSlideshow:FC <Props> = ({images,title,className}) => {
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
         direction='vertical'
-        className='col-span-1 '
-       
-
+        className='col-span-1  w-4'
       >
         {
         images.map(img=>(
                 <SwiperSlide key={img}>
                 <Image src={`/products/${img}`}  width={300} height={300} alt={title}
-                className='rounded-lg object-fill'
+                className=' object-fill rounded-md'
                 />
                 </SwiperSlide>
 
@@ -54,9 +52,11 @@ export const ProductSlideshow:FC <Props> = ({images,title,className}) => {
         style={{
           '--swiper-navigation-color': '#fff',
           '--swiper-pagination-color': '#fff',
+         height:'100vh'
         } as React.CSSProperties
+      
     
-    }
+       }
         spaceBetween={10}
         navigation={true}
         autoplay={{
@@ -65,7 +65,7 @@ export const ProductSlideshow:FC <Props> = ({images,title,className}) => {
         thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Navigation, Thumbs,Autoplay]}
         className="mySwiper2 col-span-4"
-       
+
        
        
       >

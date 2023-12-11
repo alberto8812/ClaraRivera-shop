@@ -5,7 +5,10 @@ import { inter, titleFont } from './config/fonts'
 
 
 export const metadata: Metadata = {
-  title: 'clara rivera marketpalce',
+  title:{
+    template: '%s - ClaraRivera Marketplace',
+    default: 'Home -  ClaraRivera Marketplace'
+  },
   description: 'tienda virtual de productos',
 }
 
