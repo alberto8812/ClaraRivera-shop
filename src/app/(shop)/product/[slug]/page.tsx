@@ -8,6 +8,7 @@ import { titleFont } from "@/app/config/fonts";
 import { ProductMobileSlideshow, ProductSlideshow, QuantitySelector, SizeSelector, StokcLabel } from "@/components";
 
 import { IoAddCircleOutline, IoHeart } from "react-icons/io5";
+import { AddToCart } from "./ui/AddToCart";
 
 
 interface Props{
@@ -94,6 +95,8 @@ export default  async function ProductPage({params}:Props) {
           ${getProduct.price} COP
       </p>
 
+       <AddToCart product={getProduct}/>
+      
        {/* descripcion */}
        <h3 className="font-bold text-2xl">Descripcion</h3>
         <p className="text-1xl">
@@ -102,30 +105,6 @@ export default  async function ProductPage({params}:Props) {
           }
         </p>
 
-              {/* selecto de tallas */}
-          {
-          getProduct.sizes.length >1 &&
-          (<SizeSelector
-            selecdSize={getProduct.sizes[0]}
-            availableSizes={getProduct.sizes}
-            />)
-          }
-        <div className=" flex  pt-4 pb-4">
-          <QuantitySelector quantity={3}/>
-        </div>
-
-        <div className=" flex  pt-4 pb-4">
-        <IoAddCircleOutline size={30} className="text-red-400" />
-        <h3 className="font-bold text-2xl text-red-400 ml-3">Añadir a tus favoritos</h3>
-        </div>
-
-
-        {/* button */}
-       <button
-        className="btn-primary my-5"
-        >
-          Agregar al carrito
-        </button>
 
 
 
