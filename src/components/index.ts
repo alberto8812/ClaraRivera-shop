@@ -1,10 +1,15 @@
 
+
+
 {/*ui componete */}
 export { Footer } from "./ui/footer/Footer";
 export { Sidebar } from "./ui/sidebar/Sidebar";
 export { SlideShowImage } from "./slideshowimage/SlideShowImage";
 export { TopMenu } from "./ui/top-menu/TopMenu";
+export { Pagination } from "./ui/pagination/Pagination";
 export { TopMenuItem } from "./ui/top-menu-item/TopMenuItem";
+export { PageNotFound } from "./ui/not-found/PageNotFoun";
+
 export { Title } from "./ui/title/Title";
 
 

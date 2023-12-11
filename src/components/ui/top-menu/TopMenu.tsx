@@ -111,7 +111,7 @@ export const TopMenu:FC <Props> =({categoriesSubcategories}) => {
             Envios gratis por compras superiores $100.000 COP
           </span>
       </div>
-      <div className='flex w-full justify-center bg-[rgba(211,207,184,255)] '>
+      <div className='flex w-full justify-center bg-[rgba(211,207,184,255)] flex-col '>
         {/* <div className='flex relative group'> */}
           <ul className='flex items-center justify-center font-semibold'>
              {
@@ -120,8 +120,53 @@ export const TopMenu:FC <Props> =({categoriesSubcategories}) => {
               ))   
             } 
           </ul>
+       
+          {/* <div className='relative group px-3 py-2 bg-red-400 top-[-28px]'>
+           
+          <div
+             className=' absolute top-0 right-0 transition
+             group-hover:translate-y-12  inset-0
+             translate-y-0 opacity-0 invisible 
+             group-hover:opacity-100
+             group-hover:visible
+             duration-500
+             ease-in-out
+             group-hover:transform z-50
+             min-w-[450px]
+             transform
+             '
+            >
+              <div
+              className='relative top-6 p-6  bg-white rounded-xl shadow-xl w-full'
+              >
+                <div
+                  className='w-10 h-10 bg-white transform
+                    rotate-45 absolute top-0 z-0 -translate-x-4 
+                    transition-transform group-hover:translate-x-3
+                  duration-500 ease-in-out rounded-sm
+                      '
+                ></div>
+                <div className='relative z-10'>
+                  <div className='flex  h-[500px] '>
+                    <div className='mt-8'>
+                      <p className='uppercase tracking-wider text-gray-500 font-medium text-[13px]'>
+                        Categoria
+                      </p>
+                      <div className='mt-8 text-[15px]   text-[rgba(0,81,89,255)]  grid  grid-cols-4 grid-rows-8  gap-4 '>
+                       carlos
+
+                      </div>
+                    </div>
+                  </div>
+            
+                </div>
+            
+              
+              </div>
+              </div>
+            </div>   */}
+  
         </div>
-      {/* </div> */}
     </nav>
   )
 }

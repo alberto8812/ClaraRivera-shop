@@ -34,7 +34,7 @@ export const TopMenuItem:FC <Props> = ({categoryName,subcategories}) => {
     duration-500
     ease-in-out
     group-hover:transform z-50
-    min-w-[450px]
+    min-w-[500px]
     transform
     '
     >
@@ -54,15 +54,15 @@ export const TopMenuItem:FC <Props> = ({categoryName,subcategories}) => {
               <p className='uppercase tracking-wider text-gray-500 font-medium text-[13px]'>
                 Categoria
               </p>
-              <div className='mt-8 text-[15px]   text-[rgba(0,81,89,255)]  grid  grid-cols-4 grid-rows-8  gap-4 '>
+              <div className='mt-8 text-[15px]   text-[rgba(0,81,89,255)]  grid  grid-cols-4 grid-rows-8  gap-4  items-center justify-around'>
               {
                 subcategories.map(subcategory=>(
                   <div key={subcategory.id}  >
     
-                    <Link href={'/'} 
+                    <Link href={`/category/${encodeURIComponent(categoryName+'_'+ subcategory.name)}`} 
                     className='block p-2  
-                    -mx-2 rounded-lg hover:bg-gradient-to-br hover:from-indigo-50
-                    hover:to-pink-50 hover:via-blue-50 transition
+                    -mx-2 rounded-lg hover:bg-gradient-to-br 
+                    hover:underline 
                     ease-in-out duration-300 text-[rgba(0,81,89,255)]  font-semibold
                     hover:text-indigo-600
                     '>{subcategory.name}</Link>
