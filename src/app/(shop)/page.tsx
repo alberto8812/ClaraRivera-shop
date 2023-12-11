@@ -1,10 +1,9 @@
 
-import { categoruProduct } from '@/api/CategoryProduct'
+export const revalidate = 60;///60 segundos
 import {   SlideShowImage } from '@/components'
 import { ProductCardHome } from '@/components/product/productCardhome/ProductCardHome'
-import Link from 'next/link'
 import { titleFont } from '../config/fonts'
-import { getHomeProductsWithImages, getPaginatedProductsWithImages } from '@/actions'
+import { getHomeProductsWithImages,  } from '@/actions'
 
 export default async function Home() {
 

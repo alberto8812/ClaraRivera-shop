@@ -1,6 +1,9 @@
+export const revalidate = 60;///60 segundos
+
+import { redirect } from "next/navigation";
+
 import { getPaginatedProductsWithImages } from "@/actions";
 import { Pagination, ProductCardHome, Title } from "@/components";
-import { redirect } from "next/navigation";
 
 
 
@@ -17,7 +20,7 @@ interface Props{
 
 
 
-export default async function ({params,searchParams}:Props) {
+export default async function CategoryPage({params,searchParams}:Props) {
   const {category}=params;
   const page=searchParams.page? parseInt(searchParams.page):1;
   const getProductCategory= await getPaginatedProductsWithImages({page,category});

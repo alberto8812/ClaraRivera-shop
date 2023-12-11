@@ -7,7 +7,7 @@ import { IoAt, IoLockClosed } from 'react-icons/io5';
 import { RiFacebookLine, RiGoogleLine } from 'react-icons/ri';
 
 
-export default function () {
+export default function LoginPage() {
   return (
 <div className="grid grid-cols-1 md:grid-cols-2  h-screen">
   

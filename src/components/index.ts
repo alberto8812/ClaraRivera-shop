@@ -20,4 +20,5 @@ export { ProductCardHome } from "./product/productCardhome/ProductCardHome";
 export { ProductMobileSlideshow } from "./product/slidesshow/ProductMobileSlideshow";
 export { ProductSlideshow } from "./product/slidesshow/ProductSlideshow";
 export { QuantitySelector } from "./product/quantity-selector/QuantitySelector";
+export { StokcLabel } from "./product/stock-label/StockLabel";
 

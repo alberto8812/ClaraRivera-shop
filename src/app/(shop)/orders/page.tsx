@@ -9,7 +9,7 @@ import { Title } from '@/components';
 import Link from 'next/link';
 import { IoCardOutline } from 'react-icons/io5';
 
-export default function() {
+export default function OdersPage() {
   return (
     <div className='h-[100vh] '>
       <Title title="Orders" />

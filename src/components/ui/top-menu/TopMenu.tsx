@@ -11,33 +11,8 @@ import { FC } from 'react';
 
 
 
-//todo pediente modificar
-const itemMenu=[
-  {
-    categoryName:"Mujer"
-  },
-  {
-    categoryName:"Hombre"
-  },
-  {
-    categoryName:"Niños"
-  },
-  {
-    categoryName:"Jugueteria"
-  },
-  {
-    categoryName:"Regalos"
-  },
-  {
-    categoryName:"Hogar"
-  },
-  {
-    categoryName:"Mascotas"
-  },
-  {
-    categoryName:"Belleza y bienestar"
-  },
-]
+
+
 interface SubCategory {
   id:string,
   name:string
@@ -85,11 +60,11 @@ export const TopMenu:FC <Props> =({categoriesSubcategories}) => {
           {/* search cart, menu */}
 
           <div className='flex items-center'>
-                  <Link  href="/search" className='mx-2'>
+                  <Link  href="/" className='mx-2'>
                     <IoSearchOutline  className="w-8 h-8  text-cyan-50" />
                   </Link>
 
-                  <Link  href="/search" className='mx-2'>
+                  <Link  href="/" className='mx-2'>
                     <IoPersonCircleOutline   className="w-8 h-8  text-cyan-50" />
                   </Link>
 
