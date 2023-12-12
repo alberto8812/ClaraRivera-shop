@@ -11,6 +11,9 @@ export { TopMenuItem } from "./ui/top-menu-item/TopMenuItem";
 export { PageNotFound } from "./ui/not-found/PageNotFoun";
 
 export { Title } from "./ui/title/Title";
+/*prueva posiblemente borrar */
+export { SidebarItemMobil } from "./ui/top-menu-item/SidebarItemMobil";
+
 
 
 {/*product */}

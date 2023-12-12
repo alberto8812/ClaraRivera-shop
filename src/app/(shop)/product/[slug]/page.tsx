@@ -59,7 +59,7 @@ export default  async function ProductPage({params}:Props) {
 
 
   return (
-    <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3  ">
+    <div className="mt-5 mb-20 grid grid-cols-1 lg:grid-cols-3 gap-3  ">
 
     <div className="col-span-1 md:col-span-2  ">
             {/* slideshow mobile */}
@@ -72,12 +72,12 @@ export default  async function ProductPage({params}:Props) {
        <ProductSlideshow
        images={getProduct.images}
        title={getProduct.title}
-       className="hidden md:grid"
+       className="hidden md:grid "
        />
 
     </div>
      {/* detalles */}
-     <div className="col-span-1 px-5 pt-16  md:grid-cols-2">
+     <div className="col-span-1 px-5   md:grid-cols-2 lg:pt-16">
 
      <StokcLabel slug={getProduct.slug}/>
 

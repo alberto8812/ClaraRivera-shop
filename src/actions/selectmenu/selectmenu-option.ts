@@ -14,15 +14,42 @@ export const getCategoryAndSubcategory=async()=>{
                         name:true,
                         id:true
                     }
+                },
+                Product:{
+                    take:1,
+                    select:{
+                        productImage:{
+                            take:1,
+                            select:{
+                               url:true
+                            }
+                        }
+                    }
                 }
 
             }
 
           })
-        
-          return getcategories;
+
+
+
+         const data= getcategories.map(item=>{
+             const {id,name,subCategory,Product}=item;
+
+             return{
+                id,
+                name,
+                subCategory,
+                image:Product[0]?.productImage[0]?.url ?? ''
+             }
+          });
+
+          console.log(data)
+
+        return data;
+   
         
     } catch (error) {
-        throw ("FALLO")
+        throw (error)
     }
 }

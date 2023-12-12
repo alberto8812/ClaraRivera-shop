@@ -4,10 +4,11 @@ import Image from 'next/image';
 
 import { titleFont } from '@/app/config/fonts'
 
-import { IoSearchOutline,IoCartOutline,IoPersonCircleOutline,IoMenuOutline   } from "react-icons/io5";
+import { IoSearchOutline,IoCartOutline,IoPersonCircleOutline,IoMenuOutline, IoHomeOutline   } from "react-icons/io5";
 import { TopMenuItem } from '../top-menu-item/TopMenuItem';
 import { useCartStore, useUIStore } from '@/store';
 import { FC, useEffect, useState } from 'react';
+import { Product } from '@/components/interfaces';
 
 
 
@@ -21,7 +22,8 @@ interface SubCategory {
 interface CategoriesSubcategories{
   id:string,
   name:string
-  subCategory:SubCategory[]
+  subCategory:SubCategory[],
+  image:string
 }
 
 interface Props{
@@ -31,6 +33,7 @@ interface Props{
 
 export const TopMenu:FC <Props> =({categoriesSubcategories}) => {
   const openSideMenu=useUIStore(state=>state.openSideMenu);
+  const openSidItemMovilOpen=useUIStore(state=>state.openSidItemMovilOpen);
   const totalItemsCart=useCartStore(state=>state.getTotalItems());
   const [isloaded, setIsloaded] = useState(false);
 
@@ -45,9 +48,18 @@ export const TopMenu:FC <Props> =({categoriesSubcategories}) => {
        <div className='flex px-5 justify-between items-center w-full pb-5 pt-2 bg-[rgba(156,34,78,255)]'>       
             <div  className='m-2 p-2 rounded-md transition-all hover:bg-[#b76080] text-white'>
                     <IoMenuOutline   
-                    className="w-10 h-10 text-cyan-50" 
-                    onClick={openSideMenu}
+                    className="w-10 h-10 text-cyan-50 block lg:hidden" 
+                      onClick={openSidItemMovilOpen}
                      />
+                    <Link
+                    href={'/'}
+                    >
+                      <IoHomeOutline    
+                      className="w-10 h-10 text-cyan-50 hidden lg:block" 
+              
+                      size={10}
+                      />
+                    </Link>
     
             </div>
 
@@ -70,7 +82,7 @@ export const TopMenu:FC <Props> =({categoriesSubcategories}) => {
                   </Link>
 
                   <Link  href="/" className='mx-2'>
-                    <IoPersonCircleOutline   className="w-8 h-8  text-cyan-50" />
+                    <IoPersonCircleOutline   className="w-8 h-8  text-cyan-50"    onClick={openSideMenu} />
                   </Link>
 
                   <Link  href={`${(totalItemsCart>0) && (isloaded) ?'/cart':'/empty'}`} className='mx-2'>
@@ -84,9 +96,6 @@ export const TopMenu:FC <Props> =({categoriesSubcategories}) => {
                       <IoCartOutline  className="w-8 h-8 text-cyan-50"  />
                     </div>
                   </Link>
-
-
-
           </div>
       </div>
       <div>
@@ -94,62 +103,21 @@ export const TopMenu:FC <Props> =({categoriesSubcategories}) => {
             Envios gratis por compras superiores $100.000 COP
           </span>
       </div>
-      <div className='flex w-full justify-center bg-[rgba(211,207,184,255)] flex-col '>
-        {/* <div className='flex relative group'> */}
-          <ul className='flex items-center justify-center font-semibold'>
-             {
-              categoriesSubcategories.map(category=>(
-                <TopMenuItem categoryName={category.name} key={category.id}  subcategories={category.subCategory}/>
-              ))   
-            } 
-          </ul>
-       
-          {/* <div className='relative group px-3 py-2 bg-red-400 top-[-28px]'>
-           
-          <div
-             className=' absolute top-0 right-0 transition
-             group-hover:translate-y-12  inset-0
-             translate-y-0 opacity-0 invisible 
-             group-hover:opacity-100
-             group-hover:visible
-             duration-500
-             ease-in-out
-             group-hover:transform z-50
-             min-w-[450px]
-             transform
-             '
-            >
-              <div
-              className='relative top-6 p-6  bg-white rounded-xl shadow-xl w-full'
-              >
-                <div
-                  className='w-10 h-10 bg-white transform
-                    rotate-45 absolute top-0 z-0 -translate-x-4 
-                    transition-transform group-hover:translate-x-3
-                  duration-500 ease-in-out rounded-sm
-                      '
-                ></div>
-                <div className='relative z-10'>
-                  <div className='flex  h-[500px] '>
-                    <div className='mt-8'>
-                      <p className='uppercase tracking-wider text-gray-500 font-medium text-[13px]'>
-                        Categoria
-                      </p>
-                      <div className='mt-8 text-[15px]   text-[rgba(0,81,89,255)]  grid  grid-cols-4 grid-rows-8  gap-4 '>
-                       carlos
+      <div className='bg-[rgba(211,207,184,255)] w-full flex  justify-center  items-center'>
+        <div className=' bg-[rgba(211,207,184,255)] flex-col relative items-center hidden sm:hidden md:hidden  lg:block'>
+           <ul className='flex items-center justify-center font-semibold '>
+ 
+              {
+                 categoriesSubcategories.map(category=>(
+                 <TopMenuItem categoryName={category.name} key={category.id}  subcategories={category.subCategory} image={category.image}/>
+               ))   
+             }
+ 
+           </ul>
 
-                      </div>
-                    </div>
-                  </div>
-            
-                </div>
-            
-              
-              </div>
-              </div>
-            </div>   */}
-  
-        </div>
+
+         </div>
+      </div>
     </nav>
   )
 }
