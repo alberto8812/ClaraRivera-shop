@@ -68,8 +68,10 @@ export const SidebarMobilCategorySucategoryLoad:FC <Props>= ({categoryName,subca
                           hover:underline 
                           ease-in-out duration-300   font-semibold
                           hover:text-indigo-600 text-[15px]
-                          '>                
-                            <li   className='flex items-center mt-1 p-2 hover:bg-gray-100 rounded transition-all' key={subCategory.id}>
+                          '
+                          key={subCategory.id}
+                          >                
+                            <li   className='flex items-center mt-1 p-2 hover:bg-gray-100 rounded transition-all' >
                         
                                   {subCategory.name}
                             </li>

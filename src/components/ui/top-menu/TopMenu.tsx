@@ -55,7 +55,7 @@ export const TopMenu:FC <Props> =({categoriesSubcategories}) => {
                     href={'/'}
                     >
                       <IoHomeOutline    
-                      className="w-10 h-10 text-cyan-50 hidden lg:block" 
+                      className="w-8 h-8 text-cyan-50 hidden lg:block" 
               
                       size={10}
                       />

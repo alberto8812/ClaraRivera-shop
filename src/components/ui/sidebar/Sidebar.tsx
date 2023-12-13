@@ -3,7 +3,7 @@
 import { useUIStore } from "@/store";
 import clsx from "clsx";
 import Link from "next/link";
-import { IoCloseCircleOutline, IoCloseOutline, IoLogInOutline, IoLogOutOutline, IoPeopleOutline, IoPersonOutline, IoSearchOutline, IoShirtOutline, IoTicketOutline } from "react-icons/io5";
+import { IoCloseCircleOutline, IoCloseOutline, IoHeartOutline, IoLogInOutline, IoLogOutOutline, IoPeopleOutline, IoPersonOutline, IoSearchOutline, IoShirtOutline, IoTicketOutline } from "react-icons/io5";
 
 export const Sidebar = () => {
    
@@ -64,12 +64,20 @@ export const Sidebar = () => {
 
         </div>
                 {/* menu */}
-                <Link
+        <Link
          href={'/'}
          className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
         >
             <IoPersonOutline size={30} />
             <span className='ml-3 text-xl'>Perfil</span>
+
+        </Link>
+        <Link
+         href={'/'}
+         className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
+        >
+            <IoHeartOutline  size={30} />
+            <span className='ml-3 text-xl'>Favoritos</span>
 
         </Link>
         <Link
