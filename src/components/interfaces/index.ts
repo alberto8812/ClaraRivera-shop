@@ -1,4 +1,5 @@
 
 
 
-export  * from "./product.Interface"
+export  * from "./product.Interface";
+export  * from "./productCategoryMenuInterface";
