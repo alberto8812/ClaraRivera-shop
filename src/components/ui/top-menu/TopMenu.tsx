@@ -98,14 +98,14 @@ export const TopMenu:FC <Props> =({categoriesSubcategories}) => {
                   </Link>
           </div>
       </div>
-      <div>
-          <span className={`${titleFont.className} m-5 p-5 rounded-md transition-all hover:bg-[#b76080] font-bold  `}>
+      <div className='flex justify-center items-center text-center'>
+          <span className={`${titleFont.className}rounded-md transition-all hover:bg-[#b76080] font-bold text-center `} >
             Envios gratis por compras superiores $100.000 COP
           </span>
       </div>
       <div className='bg-[rgba(211,207,184,255)] w-full flex  justify-center  items-center'>
-        <div className=' bg-[rgba(211,207,184,255)] flex-col relative items-center hidden sm:hidden md:hidden  lg:block'>
-           <ul className='flex items-center justify-center font-semibold '>
+        <div className=' bg-[rgba(211,207,184,255)] flex-col relative items-center hidden sm:hidden md:hidden  lg:block '>
+           <ul className='flex items-center justify-center font-semibold scroll-m-5 '>
  
               {
                  categoriesSubcategories.map(category=>(

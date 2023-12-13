@@ -20,7 +20,7 @@ export const ProductCardHome:FC <Props> = ({product}) => {
 
   return (
         <div className= "h-full ">
-          <div className="relative m-10 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md h-[480px]">        
+          <div className="relative m-0 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md h-[480px]">        
                 <div className="relative mx-3 mt-3 flex h-80 overflow-hidden rounded-xl">
                   <Link href={`/product/${product.slug}`}>  
                       <Image

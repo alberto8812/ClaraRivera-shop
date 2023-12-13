@@ -13,7 +13,7 @@ export default async  function shopLayout({
     <main className="min-h-screen">
      <TopMenu categoriesSubcategories={categoriesAnsubcategories}/>
      <Sidebar/>
-     <SidebarItemMobil/>
+     <SidebarItemMobil categoriesSubcategories={categoriesAnsubcategories}/>
   
      <div className="px-0 ">
       {children}
