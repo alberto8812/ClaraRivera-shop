@@ -18,7 +18,7 @@ interface seedUser{
   email:string;
   name:string;
   password:string;
-  role: 'admin'|'user'|'superAmind'
+  roles: 'admin'|'user'|'superAmind'
 }
 
 type ValidSizes = 'XS'|'S'|'M'|'L'|'XL'|'XXL'|'XXXL';
@@ -808,13 +808,13 @@ export const initialData: SeedData = {
         name:'Rosa milena',
         email:'rosa@gmail.com',
         password:bcryptjs.hashSync('123456'),
-        role:'admin',
+        roles:'admin',
       },
       {
         name:'lina',
         email:'lina@gmail.com',
         password:bcryptjs.hashSync('122245'),
-        role:'user',
+        roles:'user',
       },
     ],
 }
