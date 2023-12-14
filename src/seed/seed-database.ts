@@ -6,14 +6,16 @@ async function main() {
   
 
     //1.borrar registros previos
-
+        await prisma.user.deleteMany();
         await prisma.productImage.deleteMany();
         await prisma.product.deleteMany();
         await prisma.category.deleteMany();
         await prisma.subCategory.deleteMany();
 
 
-    const {categories,subCategories,products}=initialData;
+    const {categories,subCategories,products,seedUser}=initialData;
+
+
     const categoriesData2=categories.map(category=>({
         name:category
     }))
@@ -30,13 +32,6 @@ async function main() {
      await prisma.category.createMany({
         data:categoriesData2
      })
-
-
-
-     
-  
-  
-
 
 
 
@@ -82,6 +77,10 @@ async function main() {
         })
 
      });
+
+     await prisma.user.createMany({
+        data:seedUser
+    })
 
 
     //      //borrar//

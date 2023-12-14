@@ -1,3 +1,5 @@
+import bcryptjs from "bcryptjs";
+
 interface SeedProduct {
     description: string;
     images: string[];
@@ -11,12 +13,21 @@ interface SeedProduct {
     gender: 'hombre'|'mujer'|'kids'|'unisex'| 'NA' 
 }
 
+
+interface seedUser{
+  email:string;
+  name:string;
+  password:string;
+  role: 'admin'|'user'|'superAmind'
+}
+
 type ValidSizes = 'XS'|'S'|'M'|'L'|'XL'|'XXL'|'XXXL';
 type ValidTypes = 'shirts'|'pants'|'hoodies'|'hats' | 'videojuegos' | 'smartwatch'| 'computadores';
 type CategoryTypes= 'mujer'|'hombre'|'kids'|'hogar'|'tecnología'|'mascotas'|'Belleza y salud'|'otros' ;
 
 interface SeedData {
-    categories: string[]
+    seedUser:seedUser[],
+    categories: string[],
     subCategories: string[]
     products: SeedProduct[],
     
@@ -790,12 +801,21 @@ export const initialData: SeedData = {
             title: 'Computador Portátil Gamer ROG Strix Scar 18" Pulgadas G834JY - Intel Core i9 - RAM 64GB - Disco SSD 2TB - Negro',
             gender: 'hombre'
         },
-
-
-
-
-
-
-
     ]
+    ,
+    seedUser:[
+      {
+        name:'Rosa milena',
+        email:'rosa@gmail.com',
+        password:bcryptjs.hashSync('123456'),
+        role:'admin',
+      },
+      {
+        name:'lina',
+        email:'lina@gmail.com',
+        password:bcryptjs.hashSync('122245'),
+        role:'user',
+      },
+    ],
 }
+
