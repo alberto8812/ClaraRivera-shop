@@ -1,3 +1,4 @@
+
 {/*ui componete */}
 export { Footer } from "./ui/footer/Footer";
 export { Sidebar } from "./ui/sidebar/Sidebar";
@@ -23,3 +24,5 @@ export { ProductSlideshow } from "./product/slidesshow/ProductSlideshow";
 export { QuantitySelector } from "./product/quantity-selector/QuantitySelector";
 export { StokcLabel } from "./product/stock-label/StockLabel";
 
+
+export { AuthProvider } from "./Authprovider/AuthProvider";

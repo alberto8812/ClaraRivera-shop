@@ -1,15 +1,18 @@
 'use client'
-
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useUIStore } from "@/store";
 import clsx from "clsx";
 import Link from "next/link";
 import { IoCloseCircleOutline, IoCloseOutline, IoHeartOutline, IoLogInOutline, IoLogOutOutline, IoPeopleOutline, IoPersonOutline, IoSearchOutline, IoShirtOutline, IoTicketOutline } from "react-icons/io5";
+import Image from "next/image";
 
 export const Sidebar = () => {
    
 
     const isSideMenuOpen=useUIStore(state=>state.isSideMenuOpen);
     const closeSideMenu=useUIStore(state=>state.closeSideMenu);
+    const {data:session,status}=useSession();
+
 
 
   return (
@@ -50,28 +53,39 @@ export const Sidebar = () => {
             onClick={()=>closeSideMenu()}
            />
 
-           {/*input */}
-        <div className="relative mt-20">
-            <IoSearchOutline
-            size={20}
-            className="absolute top-2 right-2"
-            />
-            <input
-                type='text'
-                placeholder='Buscar'
-                className='w-full bg-gray-50 rounded pl-10 py-1 border-b-2 text-xl border-gray-200 focus:outline-none focus:border-blue-500'
-            />
+
+
+                {/* menu */}
+        
+
+        <div
+         className="flex flex-col justify-center items-center mt-[80px]"
+        >
+            <div 
+             className="w-10 md:w-16 rounded-full mx-auto"
+            >
+                <Image
+                 src={session?.user?.image ?? `/imgs/avatarOutImage.jpg`}
+                 width={500}
+                 height={500}
+                 alt=""
+                 className="w-10 md:w-16 rounded-full mx-auto"
+                />
+            </div>
+            <div className="mt-3">
+                <span
+                 className="font-medium text-xs md:text-xl text-center "
+                >{session?.user?.name ?? 'nombre'}</span>
+            </div>
+            <div>
+                <span
+                 className="text-sm text-gray-500 text-center font-medium "
+                >{session?.user?.roles ?? ''}</span>
+            </div>
 
         </div>
-                {/* menu */}
-        <Link
-         href={'/'}
-         className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
-        >
-            <IoPersonOutline size={30} />
-            <span className='ml-3 text-xl'>Perfil</span>
+        
 
-        </Link>
         <Link
          href={'/'}
          className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
@@ -85,26 +99,33 @@ export const Sidebar = () => {
          className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
         >
             <IoTicketOutline size={30} />
-            <span className='ml-3 text-xl'>Oridenes</span>
+            <span className='ml-3 text-xl'>Ordenes</span>
 
         </Link>
-        <Link
+       {
+        status=='unauthenticated' &&
+        (<Link
          href={'/auth/login'}
          className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
         >
             <IoLogInOutline size={30} />
             <span className='ml-3 text-xl'>Ingresar</span>
 
-        </Link>
-        <Link
-         href={'/'}
-         className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
-        >
-            <IoLogOutOutline size={30} />
-            <span className='ml-3 text-xl'>Salir</span>
-
-        </Link>
-
+        </Link>)
+        }
+        {
+       status=='authenticated' &&
+            (<Link
+            href={'/'}
+            className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
+            >
+                <IoLogOutOutline size={30} />
+                <span className='ml-3 text-xl'
+                onClick={()=>signOut()}
+                >Salir
+                </span>
+            </Link>)
+        }
         {/* line separator */}
 
         <div className='w-full h-px bg-gray-200 my-10'/>
