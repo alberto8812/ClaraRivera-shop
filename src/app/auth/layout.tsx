@@ -1,3 +1,4 @@
+import { AuthProvider } from "@/components";
 import { titleFont } from "../config/fonts";
 
 export default function shopLayout({
@@ -8,7 +9,9 @@ export default function shopLayout({
   return (
     <main className={`${titleFont.className}`}>
       <div>
+        <AuthProvider>
          {children}
+        </AuthProvider>
       </div> 
     </main>
   );

@@ -23,7 +23,7 @@ export default async function Home() {
           return(
           <div key={category.name} className=''>
             <div className='flex flex-col justify-center items-center'> 
-              <div className='flex justify-center  items-centerm-2 '>
+              <div className='flex justify-center  items-centerm-2  mb-3'>
                 <span className={`${titleFont.className}  text-2xl text-[rgba(0,81,89,255)] font-bold p-4 border  border-[rgba(0,81,89,255)] rounded-3xl`}>{category.name}</span>
               </div>
               <div className=' w-80 justify-center flex  bg-gray-400 items-center' >
@@ -31,8 +31,8 @@ export default async function Home() {
               </div>
             </div>
            
-        
-           <div className=' grid grid-cols-1 sm:grid-cols-3  sm:justify-evenly    p-5   gap-4  items-center justify-center '>
+    
+           <div className=' grid grid-cols-1 sm:grid-cols-3  sm:justify-evenly    p-5   gap-10  items-center justify-center '>
             {
               category.product?.map(product=>(
                 
@@ -42,6 +42,7 @@ export default async function Home() {
                    ))
                   }
              </div>
+          
              
           </div>
           )
