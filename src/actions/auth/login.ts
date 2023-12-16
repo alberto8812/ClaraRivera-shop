@@ -30,6 +30,8 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 import prisma from "@/lib/prisma";
 import bcrypt from 'bcryptjs';
+import { signIn } from "next-auth/react";
+
 
 export const getUserSessionServer = async() => {
   const session = await getServerSession(authOptions);
@@ -60,6 +62,21 @@ export const signInEmailPassword = async( email: string, password: string ) => {
       return user;
     
 
+}
+
+
+export const login=async(email:string,password:string)=>{
+   try {
+    await signIn('Credentials',{email,password})
+    return {ok:true}
+   } catch (error) {
+    console.log(error)
+    return{
+      ok:false,
+      message:'Nose pudo iniciar session'
+    }
+    
+   }
 }
 
 // const createUser = async (email: string, password: string ) => {

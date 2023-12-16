@@ -33,9 +33,7 @@ export const LoginForm = () => {
             
             setLoading(true);
             setFormValues({email:"",password:""});
-            
-            console.log(formValues);
-         
+                     
 
             const response=await signIn("credentials",{
                 redirect:false,
