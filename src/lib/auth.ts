@@ -1,14 +1,11 @@
 import prisma from '@/lib/prisma';
 import { PrismaAdapter } from '@auth/prisma-adapter';
-import NextAuth, { NextAuthOptions } from 'next-auth';
+import NextAuth, { type NextAuthOptions } from 'next-auth';
 import { Adapter } from 'next-auth/adapters';
-
-import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from "next-auth/providers/credentials";
 import { signInEmailPassword } from '@/actions';
-
-
+import { z } from 'zod';
 
 
 
@@ -19,6 +16,7 @@ export const authOptions:NextAuthOptions = {
   adapter: PrismaAdapter( prisma ) as Adapter,
   pages: {
     signIn: "/auth/login",
+    newUser: "/auth/new-account",
 
   },
   providers: [
@@ -28,21 +26,24 @@ export const authOptions:NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
     }),
 
-    GithubProvider({
-      clientId: process.env.GITHUB_ID ?? '',
-      clientSecret: process.env.GITHUB_SECRET ?? '',
-    }),
-
-
     CredentialsProvider({
       name: "Credentials",
       credentials: {
         email: { label: "Correo electrónico", type: "email", placeholder: "usuario@google.com" },
         password: { label: "Contraseña", type: "password", placeholder: '******' }
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         // Add logic here to look up the user from the credentials supplied
-        const user = await signInEmailPassword(credentials!.email, credentials!.password );
+        const parsedCredentials=z
+        .object({email:z.string().email(),password:z.string().min(6)}).safeParse(credentials)
+          
+        if(!parsedCredentials.success) return null;
+
+        const {email,password}=parsedCredentials.data;
+
+
+
+        const user = await signInEmailPassword(email, password );
   
         if (user) {
           // Any object returned will be saved in `user` property of the JWT
@@ -62,10 +63,6 @@ export const authOptions:NextAuthOptions = {
 
   callbacks: {
 
-    async signIn({ user, account, profile, email, credentials }) {
-    
-      return true;
-    },
 
     async jwt({ token, user, account, profile }) {
    
@@ -103,5 +100,5 @@ export const authOptions:NextAuthOptions = {
 
 }
 
-const handler = NextAuth(authOptions);
-export { handler as GET, handler as POST };
+
+

@@ -1,10 +1,11 @@
 'use client'
-import { signIn, signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useUIStore } from "@/store";
 import clsx from "clsx";
 import Link from "next/link";
-import { IoCloseCircleOutline, IoCloseOutline, IoHeartOutline, IoLogInOutline, IoLogOutOutline, IoPeopleOutline, IoPersonOutline, IoSearchOutline, IoShirtOutline, IoTicketOutline } from "react-icons/io5";
+import { IoCloseCircleOutline, IoHeartOutline, IoLogInOutline, IoLogOutOutline, IoPeopleOutline, IoPersonOutline, IoSearchOutline, IoShirtOutline, IoTicketOutline } from "react-icons/io5";
 import Image from "next/image";
+import { logOut } from "@/actions";
 
 export const Sidebar = () => {
    
@@ -12,6 +13,8 @@ export const Sidebar = () => {
     const isSideMenuOpen=useUIStore(state=>state.isSideMenuOpen);
     const closeSideMenu=useUIStore(state=>state.closeSideMenu);
     const {data:session,status}=useSession();
+    const isLogin=(status==='authenticated');
+    const isAdmin= (session?.user?.roles === 'admin') ;
 
 
 
@@ -86,22 +89,28 @@ export const Sidebar = () => {
         </div>
         
 
-        <Link
-         href={'/'}
-         className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
-        >
-            <IoHeartOutline  size={30} />
-            <span className='ml-3 text-xl'>Favoritos</span>
+       {
+         isLogin &&    (
+                    <>
+                    <Link
+                        href={'/'}
+                        className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
+                        >
+                            <IoHeartOutline  size={30} />
+                            <span className='ml-3 text-xl'>Favoritos</span>
 
-        </Link>
-        <Link
-         href={'/'}
-         className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
-        >
-            <IoTicketOutline size={30} />
-            <span className='ml-3 text-xl'>Ordenes</span>
+                        </Link>
+                        <Link
+                        href={'/'}
+                        className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
+                        >
+                            <IoTicketOutline size={30} />
+                            <span className='ml-3 text-xl'>Ordenes</span>
 
-        </Link>
+                        </Link>
+                    </>
+                    )
+        }
        {
         status=='unauthenticated' &&
         (<Link
@@ -121,7 +130,7 @@ export const Sidebar = () => {
             >
                 <IoLogOutOutline size={30} />
                 <span className='ml-3 text-xl'
-                onClick={()=>signOut()}
+                onClick={()=>logOut()}
                 >Salir
                 </span>
             </Link>)
@@ -130,30 +139,36 @@ export const Sidebar = () => {
 
         <div className='w-full h-px bg-gray-200 my-10'/>
 
-        <Link
-         href={'/'}
-         className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
-        >
-            <IoShirtOutline size={30} />
-            <span className='ml-3 text-xl'>Products</span>
+       {
+       
+      ( isAdmin ) && (  <>
+                <Link
+                href={'/'}
+                className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
+                >
+                    <IoShirtOutline size={30} />
+                    <span className='ml-3 text-xl'>Products</span>
 
-        </Link>
-        <Link
-         href={'/'}
-         className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
-        >
-            <IoTicketOutline size={30} />
-            <span className='ml-3 text-xl'>Ordenes</span>
+                </Link>
+                <Link
+                href={'/'}
+                className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
+                >
+                    <IoTicketOutline size={30} />
+                    <span className='ml-3 text-xl'>Ordenes</span>
 
-        </Link>
-        <Link
-         href={'/'}
-         className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
-        >
-            <IoPeopleOutline size={30} />
-            <span className='ml-3 text-xl'>Usurios</span>
+                </Link>
+                <Link
+                href={'/'}
+                className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
+                >
+                    <IoPeopleOutline size={30} />
+                    <span className='ml-3 text-xl'>Usurios</span>
 
-        </Link>
+                </Link>
+                </>)
+        
+        }
 
         </nav>
     </div>

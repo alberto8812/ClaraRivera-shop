@@ -81,9 +81,9 @@ export const TopMenu:FC <Props> =({categoriesSubcategories}) => {
                     <IoSearchOutline  className="w-8 h-8  text-cyan-50" />
                   </Link>
 
-                  <Link  href="/" className='mx-2'>
+                  <div className='mx-2'>
                     <IoPersonCircleOutline   className="w-8 h-8  text-cyan-50"    onClick={openSideMenu} />
-                  </Link>
+                  </div>
 
                   <Link  href={`${(totalItemsCart>0) && (isloaded) ?'/cart':'/empty'}`} className='mx-2'>
                     <div className='relative'>
