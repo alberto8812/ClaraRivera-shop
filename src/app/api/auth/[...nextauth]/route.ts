@@ -1,3 +1,4 @@
+
 import prisma from '@/lib/prisma';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import NextAuth, { NextAuthOptions } from 'next-auth';
@@ -7,13 +8,6 @@ import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from "next-auth/providers/credentials";
 import { signInEmailPassword } from '@/actions';
-
-
-
-
-
-
-
 
 export const authOptions:NextAuthOptions = {
   adapter: PrismaAdapter( prisma ) as Adapter,
@@ -40,7 +34,7 @@ export const authOptions:NextAuthOptions = {
         email: { label: "Correo electrónico", type: "email", placeholder: "usuario@google.com" },
         password: { label: "Contraseña", type: "password", placeholder: '******' }
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         // Add logic here to look up the user from the credentials supplied
         const user = await signInEmailPassword(credentials!.email, credentials!.password );
   
@@ -63,7 +57,7 @@ export const authOptions:NextAuthOptions = {
   callbacks: {
 
     async signIn({ user, account, profile, email, credentials }) {
-    
+      console.log(user)
       return true;
     },
 

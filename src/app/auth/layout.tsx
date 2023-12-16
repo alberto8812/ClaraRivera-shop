@@ -1,8 +1,8 @@
 import { AuthProvider } from "@/components";
 import { titleFont } from "../config/fonts";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 
 
 export default async function shopLayout({
