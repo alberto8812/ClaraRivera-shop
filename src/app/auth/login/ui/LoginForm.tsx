@@ -5,7 +5,7 @@ import { IoAt, IoInformationOutline, IoLockClosed } from 'react-icons/io5'
 import { RiFacebookLine, RiGoogleLine } from 'react-icons/ri'
 import { signIn, useSession } from 'next-auth/react'
 import { redirect, useRouter, useSearchParams } from 'next/navigation'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 
 interface FormValues{
     email:string,
@@ -76,9 +76,13 @@ export const LoginForm = () => {
    };
 
 
-   if(status==='authenticated'){
-      redirect('/')
-   }
+   
+   useEffect(() => {
+       if(status==='authenticated'){
+          redirect('/');
+       }
+       
+   }, [])
 
 
   return (
@@ -88,14 +92,14 @@ export const LoginForm = () => {
 
 
             <div  className="flex flex-row justify-center items-center space-x-3 pb-3">
-                    <span className="w-11 h-11 items-center justify-center inline-flex rounded-full font-bold text-lg  text-white  bg-blue-900 hover:shadow-lg cursor-pointer transition ease-in duration-300">
-                <RiFacebookLine size={30} />
-            </span>
+                 {/* <span className="w-11 h-11 items-center justify-center inline-flex rounded-full font-bold text-lg  text-white  bg-blue-900 hover:shadow-lg cursor-pointer transition ease-in duration-300">
+                  <RiFacebookLine size={30} />
+                </span> */}
                 <span className="w-11 h-11 items-center justify-center inline-flex rounded-full font-bold text-lg  text-white bg-red-400 hover:shadow-lg cursor-pointer transition ease-in duration-300">
-            <RiGoogleLine  size={30}  onClick={()=>loginWuthOption("google")}/>
-            </span>
+                 <RiGoogleLine  size={30}  onClick={()=>loginWuthOption("google")}/>
+                </span>
 
-                </div>
+             </div>
 
             <div  className="flex items-center justify-center space-x-2 pb-4">
                 <span className="h-px w-16 bg-gray-300"></span>

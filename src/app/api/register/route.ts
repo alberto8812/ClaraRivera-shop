@@ -1,3 +1,4 @@
+'use server'
 import prisma from "@/lib/prisma";
 import {  hashSync } from "bcryptjs";
 import { NextResponse } from "next/server";
@@ -14,13 +15,13 @@ export async function POST(req:Request) {
             password:string;
         };
         
-        console.log("data 1")
+
         const dbUser= await prisma.user.findFirst({where:{email:email.toLowerCase()}}) ?? 'no-email';
-        console.log("data 2")
+
         if(dbUser!=='no-email'){
-               return NextResponse.json( "Usuario ya se encuentra registrado", { status: 400 } );
+               return NextResponse.json( "Usuario ya se encuentra registrado", { status: 404 } );
         }
-        console.log("data 3")
+
         const hashed_password= hashSync(password);
         
         const user=await prisma.user.create({
@@ -41,13 +42,7 @@ export async function POST(req:Request) {
         
     } catch (error:any) {
 
-        return new NextResponse(
-           JSON.stringify({
-            status:"error",
-            message:error.message
-           }),
-           {status:500}
-        );
+        return  NextResponse.json( error, { status: 400 } );
         
     }
     
