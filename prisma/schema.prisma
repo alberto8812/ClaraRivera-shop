@@ -137,3 +137,8 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+model Countries {
+  id   String @unique
+  name String 
+}
