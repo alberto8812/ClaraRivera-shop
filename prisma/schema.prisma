@@ -126,8 +126,11 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+
   accounts      Account[]
   sessions      Session[]
+
+  userAddress UserAddress?
 }
 
 model VerificationToken {
@@ -139,6 +142,29 @@ model VerificationToken {
 }
 
 model Countries {
-  id   String @unique
+  id   String @unique @id
   name String 
+
+
+//relaciones 
+userAddress UserAddress[]
+
+}
+
+model UserAddress {
+  id String   @id @default(uuid())
+  firstName   String
+  lastName    String
+  address     String
+  address2    String?
+  postalCode  String
+  phone       String
+
+//relaciones
+country       Countries @relation(fields: [countryId],references: [id])
+countryId     String
+
+user User @relation(fields: [userId],references: [id])
+userId String @unique
+
 }

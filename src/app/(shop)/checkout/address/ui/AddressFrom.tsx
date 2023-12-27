@@ -1,24 +1,35 @@
-
 'use client'
-import clsx from 'clsx';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form'
+
+import { useAddressStores } from '@/store';
+
+import { Country } from '@/components/interfaces';
+import clsx from 'clsx';
 
 
 interface FormInput{
     firstName       :string,
     lastName        :string,
-    adress         :string,
+    address         :string,
     optionalAddres ?:string,
     postalCode      :string,
     city            :string,
     phone           :string,
-    contry          :number,
+    country         :string,
     saveDirecction  :boolean
 
 }
 
-export const AddressFrom = () => {
-    const {handleSubmit,register,formState:{isValid}}=useForm<FormInput>(
+interface Props{
+    countries:Country[];
+}
+
+export const AddressFrom = ({countries}:Props) => {
+
+    const setAddres=useAddressStores(state=>state.setAddress);
+    const Addres=useAddressStores(state=>state.address);
+    const {handleSubmit,register,formState:{isValid},reset}=useForm<FormInput>(
         {
             defaultValues:{
                 //leer base de datos
@@ -28,7 +39,14 @@ export const AddressFrom = () => {
 
     const onSubmit=(data:FormInput)=>{
       console.log({data})
+      setAddres(data);
     };
+
+    useEffect(() => {
+      if(Addres.firstName){
+        reset(Addres);
+      }
+    }, [])
 
 
 
@@ -58,7 +76,7 @@ export const AddressFrom = () => {
             <input 
                 type="text" 
                 className="p-2 border rounded-md bg-gray-200"
-                {...register('adress',{required:true})}
+                {...register('address',{required:true})}
             />
             </div>
 
@@ -94,10 +112,14 @@ export const AddressFrom = () => {
             <span>País</span>
             <select 
                 className="p-2 border rounded-md bg-gray-200"
-                {...register('contry',{required:true})}
+                {...register('country',{required:true})}
             >
                 <option value="">[ Seleccione ]</option>
-                <option value="CRI">Colombia</option>
+                {
+                    countries.map(country=>(
+                    <option value={country.id} key={country.id}>{country.name}</option>  
+                    ))
+                }
             </select>
             </div>
 
@@ -153,7 +175,7 @@ export const AddressFrom = () => {
 
             <button 
                 type='submit'
-                disabled={isValid}
+                disabled={!isValid}
                 className={
                     clsx(
                         
