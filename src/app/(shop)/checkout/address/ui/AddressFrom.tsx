@@ -6,6 +6,8 @@ import { useAddressStores } from '@/store';
 
 import { Country } from '@/components/interfaces';
 import clsx from 'clsx';
+import { deleteUserAddres, setUserAddress } from '@/actions';
+import { useSession } from 'next-auth/react';
 
 
 interface FormInput{
@@ -23,12 +25,16 @@ interface FormInput{
 
 interface Props{
     countries:Country[];
+
 }
 
-export const AddressFrom = ({countries}:Props) => {
+export const AddressFrom = ({countries,}:Props) => {
 
     const setAddres=useAddressStores(state=>state.setAddress);
     const Addres=useAddressStores(state=>state.address);
+    const {data:session}=useSession({
+        required:true,
+    })
     const {handleSubmit,register,formState:{isValid},reset}=useForm<FormInput>(
         {
             defaultValues:{
@@ -38,8 +44,18 @@ export const AddressFrom = ({countries}:Props) => {
     );
 
     const onSubmit=(data:FormInput)=>{
-      console.log({data})
       setAddres(data);
+      const {saveDirecction,...restAddress}=data;
+      if(saveDirecction){
+        //server action
+        console.log('data')
+        console.log(restAddress)
+
+        setUserAddress(restAddress,session!.user!.id);
+      }else{
+        //borrar  la direccion
+        deleteUserAddres(session!.user!.id)
+      }
     };
 
     useEffect(() => {

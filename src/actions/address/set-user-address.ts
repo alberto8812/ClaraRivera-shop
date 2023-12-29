@@ -1,4 +1,4 @@
-'user server'
+'use server'
 
 import { Address, Country } from '@/components/interfaces';
 import prisma from "@/lib/prisma";
