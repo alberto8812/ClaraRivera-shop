@@ -1,13 +1,14 @@
 'use client'
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 import { useAddressStores } from '@/store';
 
 import { Address, Country } from '@/components/interfaces';
 import clsx from 'clsx';
 import { deleteUserAddres, setUserAddress } from '@/actions';
-import { useSession } from 'next-auth/react';
 
 
 interface FormInput{
@@ -30,7 +31,7 @@ interface Props{
 }
 
 export const AddressFrom = ({countries,userStoreAddress={}}:Props) => {
-
+    const router=useRouter();
     const setAddres=useAddressStores(state=>state.setAddress);
     const Addres=useAddressStores(state=>state.address);
     const {data:session}=useSession({
@@ -46,19 +47,19 @@ export const AddressFrom = ({countries,userStoreAddress={}}:Props) => {
         }
     );
 
-    const onSubmit=(data:FormInput)=>{
-      setAddres(data);
+    const onSubmit=async(data:FormInput)=>{
+       setAddres(data);
       const {saveDirecction,...restAddress}=data;
       if(saveDirecction){
         //server action
-        console.log('data')
-        console.log(restAddress)
-
-        setUserAddress(restAddress,session!.user!.id);
+        await setUserAddress(restAddress,session!.user!.id);
       }else{
         //borrar  la direccion
-        deleteUserAddres(session!.user!.id)
+       await deleteUserAddres(session!.user!.id)
       }
+
+      router.push('/checkout');
+
     };
 
     useEffect(() => {
