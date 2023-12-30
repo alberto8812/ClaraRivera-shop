@@ -43,6 +43,7 @@ import prisma from "@/lib/prisma";
             lastName:address.lastName,
             phone:address.phone,
             postalCode:address.postalCode,
+            city:address.city,
             userId:userId,
         }
         if(!storeAddress){

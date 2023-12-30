@@ -1,20 +1,21 @@
 'use client'
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 import { useAddressStores } from '@/store';
 
-import { Country } from '@/components/interfaces';
+import { Address, Country } from '@/components/interfaces';
 import clsx from 'clsx';
 import { deleteUserAddres, setUserAddress } from '@/actions';
-import { useSession } from 'next-auth/react';
 
 
 interface FormInput{
     firstName       :string,
     lastName        :string,
     address         :string,
-    optionalAddres ?:string,
+    optionalAddres ?:string ,
     postalCode      :string,
     city            :string,
     phone           :string,
@@ -25,11 +26,12 @@ interface FormInput{
 
 interface Props{
     countries:Country[];
+    userStoreAddress?:Partial<Address>;
 
 }
 
-export const AddressFrom = ({countries,}:Props) => {
-
+export const AddressFrom = ({countries,userStoreAddress={}}:Props) => {
+    const router=useRouter();
     const setAddres=useAddressStores(state=>state.setAddress);
     const Addres=useAddressStores(state=>state.address);
     const {data:session}=useSession({
@@ -39,23 +41,25 @@ export const AddressFrom = ({countries,}:Props) => {
         {
             defaultValues:{
                 //leer base de datos
+                ...(userStoreAddress as any),
+                saveDirecction:true,
             }
         }
     );
 
-    const onSubmit=(data:FormInput)=>{
-      setAddres(data);
+    const onSubmit=async(data:FormInput)=>{
+       setAddres(data);
       const {saveDirecction,...restAddress}=data;
       if(saveDirecction){
         //server action
-        console.log('data')
-        console.log(restAddress)
-
-        setUserAddress(restAddress,session!.user!.id);
+        await setUserAddress(restAddress,session!.user!.id);
       }else{
         //borrar  la direccion
-        deleteUserAddres(session!.user!.id)
+       await deleteUserAddres(session!.user!.id)
       }
+
+      router.push('/checkout');
+
     };
 
     useEffect(() => {
