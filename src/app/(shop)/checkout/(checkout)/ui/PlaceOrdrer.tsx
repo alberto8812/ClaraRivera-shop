@@ -1,20 +1,34 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useAddressStores, useCartStore } from "@/store";
 import { currencyFormat } from "@/util";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import clsx from "clsx";
 
 export const PlaceOrdrer = () => {
   
     const [Loaded, setLoaded] = useState(false);
+    const [isPlaceOrdenr, setIsPlaceOrder] = useState(false);
     const address=useAddressStores(state=>state.address);
     const {itemsInCart,subtotal,tax,total}=useCartStore(state=>state.getSumaryInformation());
+    const cart=useCartStore(state=>state.cart);
 
 
     useEffect(() => {
         setLoaded(true);
     }, []);
+
+    const onPlaceOrden=()=>{
+        setIsPlaceOrder(true);
+        
+        const productsToOrder=cart.map(product=>({
+            product:product.id,
+            quantity:product.quantity,
+            size:product.size,
+        }))
+        
+        setIsPlaceOrder(false)
+    }
 
     if(!Loaded){
         return(
@@ -65,12 +79,21 @@ export const PlaceOrdrer = () => {
             </a>
           </span>
         </p>
-        <Link 
-        className="flex btn-primary justify-center" 
-        href="/orders/123"
+        {/* <p className="text-red-500">Error de creación</p> */}
+        <button 
+        className={
+            clsx(
+                {
+                    'btn-primary' : !isPlaceOrdenr,
+                    'btn-disabled': isPlaceOrdenr
+                }
+            )
+        }
+        onClick={onPlaceOrden}
+        // href="/orders/123"
         >
           Checkout
-        </Link>
+        </button>
       </div>
     </div>
   );

@@ -10,7 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 enum Size {
   XS
   S
@@ -28,7 +27,6 @@ enum Gender {
   kids
   unisex
   NA
-  
 }
 
 enum Role {
@@ -37,72 +35,73 @@ enum Role {
   user
 }
 
+enum Status {
+  inPreparation
+  onWay
+  delivered
+}
 
 model Category {
-   id   String @id @default(uuid())
-   name String @unique
-   subCategory SubCategory[]
-   Product     Product[]
+  id          String        @id @default(uuid())
+  name        String        @unique
+  subCategory SubCategory[]
+  Product     Product[]
 }
 
-model SubCategory{
-   id   String @id @default(uuid())
-   name String @unique
-   category    Category[]
-   Product     Product[]
+model SubCategory {
+  id       String     @id @default(uuid())
+  name     String     @unique
+  category Category[]
+  Product  Product[]
 }
-
-
 
 model Product {
-  id          String @id @default(uuid())
+  id          String   @id @default(uuid())
   title       String
-  description String 
-  inStock     Int @default(0)
-  price       Float @default(0)
-  sizes       Size[] @default([])
-  slug        String @unique
+  description String
+  inStock     Int      @default(0)
+  price       Float    @default(0)
+  sizes       Size[]   @default([])
+  slug        String   @unique
   tags        String[] @default([])
   gender      Gender
   score       String[] @default([])
-  
-  category    Category @relation(fields: [categoryId], references: [id])
-  categoryId  String
-  subcategory SubCategory @relation(fields: [subcategoryId],references: [id])
-  subcategoryId  String
-  //relaciones
-  productImage ProductImage[]
- 
-  
-  @@index([gender])
 
+  category      Category       @relation(fields: [categoryId], references: [id])
+  categoryId    String
+  subcategory   SubCategory    @relation(fields: [subcategoryId], references: [id])
+  subcategoryId String
+  //relaciones
+  productImage  ProductImage[]
+  OrderItem     OrderItem[]
+
+  @@index([gender])
 }
 
-model  ProductImage {
-  id String @id @default(uuid())
+model ProductImage {
+  id  String @id @default(uuid())
   url String
 
-   ProductImage Product @relation(fields: [ProductId],references: [id])
-   ProductId String
+  ProductImage Product @relation(fields: [ProductId], references: [id])
+  ProductId    String
 }
-
 
 //MODELO PARA USUARUIS EN BASE DE DATOS 
 
 model Account {
-  id                        String  @id @default(uuid())
-  userId                    String
-  type                      String
-  provider                  String
-  providerAccountId         String
-  refresh_token             String?  @db.Text
-  refresh_token_expires_in  Int?
-  access_token              String?  @db.Text
-  expires_at                Int?
-  token_type                String?
-  scope                     String?
-  id_token                  String?  @db.Text
-  session_state             String?
+  id                       String  @id @default(uuid())
+  userId                   String
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String? @db.Text
+  refresh_token_expires_in Int?
+  access_token             String? @db.Text
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String? @db.Text
+  session_state            String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -127,10 +126,12 @@ model User {
   emailVerified DateTime?
   image         String?
 
-  accounts      Account[]
-  sessions      Session[]
+  accounts Account[]
+  sessions Session[]
 
   userAddress UserAddress?
+  //relaction order
+  Order       Order[]
 }
 
 model VerificationToken {
@@ -142,30 +143,83 @@ model VerificationToken {
 }
 
 model Countries {
-  id   String @unique @id
-  name String 
+  id   String @id @unique
+  name String
 
-
-//relaciones 
-userAddress UserAddress[]
-
+  //relaciones 
+  userAddress  UserAddress[]
+  OrderAddress OrderAddress[]
 }
 
 model UserAddress {
-  id String   @id @default(uuid())
-  firstName   String
-  lastName    String
-  address     String
-  address2    String?
-  postalCode  String
-  phone       String
-  city        String @default("NA")
+  id         String  @id @default(uuid())
+  firstName  String
+  lastName   String
+  address    String
+  address2   String?
+  postalCode String
+  phone      String
+  city       String  @default("NA")
 
-//relaciones
-country       Countries @relation(fields: [countryId],references: [id])
-countryId     String
+  //relaciones
+  country   Countries @relation(fields: [countryId], references: [id])
+  countryId String
 
-user User @relation(fields: [userId],references: [id])
-userId String @unique
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+}
 
+//buy order
+
+model Order {
+  id           String    @id @default(uuid())
+  subTotal     Float
+  total        Float
+  tax          Float
+  itemsInorder Int
+  isPaid       Boolean
+  status       Status    @default(inPreparation)
+  paidAt       DateTime?
+
+  createdAT DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //realation 
+
+  user         User           @relation(fields: [userId], references: [id])
+  userId       String
+  OrderItem    OrderItem[]
+  OrderAddress OrderAddress?
+}
+
+model OrderItem {
+  id       String @id @default(uuid())
+  quantity Int
+  price    Float
+  size     Size
+
+  //relation 
+  order   Order  @relation(fields: [orderId], references: [id])
+  orderId String
+
+  prodcut   Product @relation(fields: [ProductId], references: [id])
+  ProductId String
+}
+
+model OrderAddress {
+  id             String  @id @default(uuid())
+  firstName      String
+  lastName       String
+  address        String
+  optionalAddres String?
+  postalCode     String
+  city           String
+  phone          String
+
+  //relation 
+  country   Countries @relation(fields: [countryId], references: [id])
+  countryId String
+
+  order   Order  @relation(fields: [orderId], references: [id])
+  orderId String @unique
 }
