@@ -19,11 +19,12 @@ export const AddToCart = ({product}:Props) => {
     const [size, setSize]         = useState<Size | undefined>();
     const [Quantity, setQuantity] = useState(1);
     const [posted, setPosted]     = useState(false);
+  //  sizes[0]==='NA' &&  setSize('NA');
 
     const addTocart=()=>{
         setPosted(true);
 
-        if(sizes.length>0 && !size) return;
+        if(sizes.length>0 && !size && sizes[0]!=='NA') return;
          
         const cartProduct:CartProduct={
           id: product.id,
@@ -31,7 +32,7 @@ export const AddToCart = ({product}:Props) => {
           title: product.title,
           price: product.price,
           quantity: Quantity,
-          size:size,
+          size:sizes[0]!=='NA'?'NA':size,
           image: product.images[0]
         }
   

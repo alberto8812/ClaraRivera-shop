@@ -21,7 +21,7 @@ interface seedUser{
   roles: 'admin'|'user'|'superAmind'
 }
 
-type ValidSizes = 'XS'|'S'|'M'|'L'|'XL'|'XXL'|'XXXL';
+type ValidSizes = 'XS'|'S'|'M'|'L'|'XL'|'XXL'|'XXXL'|'NA';
 type ValidTypes = 'shirts'|'pants'|'hoodies'|'hats' | 'videojuegos' | 'smartwatch'| 'computadores';
 type CategoryTypes= 'mujer'|'hombre'|'kids'|'hogar'|'tecnología'|'mascotas'|'Belleza y salud'|'otros' ;
 
@@ -764,7 +764,7 @@ export const initialData: SeedData = {
             ],
             inStock: 10,
             price: 30,
-            sizes: [],
+            sizes: ['NA'],
             slug: "Consola_PS5_Estándar_825GB",
             type: 'videojuegos',
             tags: ['videojuegos'],
@@ -779,7 +779,7 @@ export const initialData: SeedData = {
             ],
             inStock: 10,
             price: 65,
-            sizes: [],
+            sizes: ['NA'],
             slug: "Reloj_SAMSUNG_Galaxy_Watch_5_Pro_de_45_mm_Gris",
             type: 'smartwatch',
             tags: ['smartwatch'],
@@ -794,7 +794,7 @@ export const initialData: SeedData = {
             ],
             inStock: 10,
             price: 30,
-            sizes: [],
+            sizes: ['NA'],
             slug: 'Computador Portátil Gamer ROG Strix Scar 18" Pulgadas G834JY - Intel Core i9 - RAM 64GB - Disco SSD 2TB - Negro',
             type: 'computadores',
             tags: ['computadores'],

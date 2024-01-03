@@ -18,7 +18,6 @@ export const getPaginatedProductsWithImages= async({page=1,take=12,category=''}:
     const  categorydecode=decodeURIComponent(categoryName);
     const subcategorydecode=decodeURIComponent(subcategoryName);
 
-    console.log(categorydecode,subcategorydecode)
 
     if(isNaN(Number(page)))page=1;
     if(page<1) page=1;
