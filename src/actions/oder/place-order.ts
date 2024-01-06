@@ -58,8 +58,41 @@ export const placeOrder = async (
     );
 
     //crear transaccion
-    const prismaTx = prisma.$transaction(async (tx) => {
+    const prismaTx =await prisma.$transaction(async (tx) => {
       //1. actualizar el stock de los productos
+
+
+      const updateProductPromises=products.map(async (product)=>{
+        //acumular los valores
+        const productQuantity=productIds.filter(
+          p=>p.productId===product.id
+        ).reduce((acs,item)=>item.quantity+acs,0);
+
+        if(productQuantity===0) throw new Error(`${product.id} no tiene  cantidad definida`);
+
+
+        return tx.product.update({
+          where:{id:product.id},
+          data:{
+            inStock:{
+              decrement:productQuantity
+            }
+          }
+        })
+      });
+
+      const updateProducts=await Promise.all(updateProductPromises);
+
+      //verificar valores negativos no stock
+
+      updateProducts.forEach(product=>{
+        if(product.inStock<0){
+          throw new Error(`${product.title} no tiene inventario suficiente`)
+        }
+      })
+
+
+
 
       //2. crear la orden header
 
@@ -106,18 +139,22 @@ export const placeOrder = async (
       })
       return {
         order: order,
-        updateProduct: [],
-     //   orderAddress: orderAddress,
-      };
-
-     
+        updateProduct: updateProducts,
+        orderAddress: orderAddress,
+      }; 
     });
 
-  } catch (error) {
+    return{
+      ok:true,
+      order:prismaTx.order,
+      prismaTx:prismaTx,
+    }
+
+  } catch (error:any) {
     console.log(error);
     return {
       ok: false,
-      message: error,
+      message: error?.message,
     };
   }
 };
