@@ -1,15 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import clsx from "clsx";
 import { useAddressStores, useCartStore } from "@/store";
 import { currencyFormat } from "@/util";
-import clsx from "clsx";
 import { placeOrder } from "@/actions";
 
 export const PlaceOrdrer = () => {
+  const router=useRouter()
   const [Loaded, setLoaded] = useState(false);
   const [isPlaceOrdenr, setIsPlaceOrder] = useState(false);
+  const [errorMessage, setErroMessage] = useState('');
   const address = useAddressStores((state) => state.address);
+  const clearCart=useCartStore(state=>state.clearCart);
+
   const { itemsInCart, subtotal, tax, total } = useCartStore((state) =>
     state.getSumaryInformation()
   );
@@ -29,9 +34,17 @@ export const PlaceOrdrer = () => {
     }));
 
     const resp= await placeOrder(productsToOrder,address);
-    console.log({resp})
+    if(!resp.ok){
+      setIsPlaceOrder(false)
+      setErroMessage(resp.message);
+      return;
+    }
 
-    setIsPlaceOrder(false);
+    //todo salio bien 
+    clearCart();
+    router.replace('/orders/' + resp.order!.id);
+
+
   };
 
   if (!Loaded) {
@@ -89,7 +102,7 @@ export const PlaceOrdrer = () => {
             </a>
           </span>
         </p>
-        {/* <p className="text-red-500">Error de creación</p> */}
+        <p className="text-red-500">{errorMessage}</p>
         <button
           className={clsx({
             "btn-primary": !isPlaceOrdenr,
