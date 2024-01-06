@@ -177,7 +177,7 @@ model Order {
   total        Float
   tax          Float
   itemsInorder Int
-  isPaid       Boolean
+  isPaid       Boolean   @default(false)
   status       Status    @default(inPreparation)
   paidAt       DateTime?
 
