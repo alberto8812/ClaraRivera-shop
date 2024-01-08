@@ -44,8 +44,7 @@ export const getCategoryAndSubcategory=async()=>{
              }
           });
 
-          console.log(data)
-
+       
         return data;
    
         
