@@ -57,7 +57,6 @@ export const authOptions:NextAuthOptions = {
   callbacks: {
 
     async signIn({ user, account, profile, email, credentials }) {
-      console.log(user)
       return true;
     },
 
@@ -89,7 +88,7 @@ export const authOptions:NextAuthOptions = {
         session.user.name     = token.name;
 
       }
-      console.log(session)
+  
       return session;
     }
 
