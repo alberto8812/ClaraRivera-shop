@@ -19,7 +19,7 @@ export default async function OdersPage() {
 
   return (
     <div className="h-[100vh] ">
-      <Title title="Orders" />
+      <Title title="Ordenes" />
 
       <div className="mb-10">
         <table className="min-w-full ">
@@ -79,7 +79,7 @@ export default async function OdersPage() {
 
                 <td className="text-sm text-gray-900 font-light px-6 ">
                   <Link
-                    href={`/orders/${order.id}}`}
+                    href={`/orders/${ order.id }`} 
                     className="hover:underline"
                   >
                     Ver orden
